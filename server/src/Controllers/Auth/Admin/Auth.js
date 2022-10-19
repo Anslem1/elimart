@@ -42,9 +42,13 @@ exports.signIn = async (req, res) => {
     if (user) {
       const validated = await bcrypt.compare(req.body.password, user.password)
       if (validated && user.role === 'admin') {
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-          expiresIn: '1h'
-        })
+        const token = jwt.sign(
+          { _id: user._id, role: user.role },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: '1h'
+          }
+        )
         const { password, ...userCreds } = user._doc
         return res.status(200).json({ token, user: userCreds })
       } else res.status(400).json({ message: 'Wrong username or password' })
@@ -52,10 +56,10 @@ exports.signIn = async (req, res) => {
   })
 }
 
-exports.requireSignin = (req, res, next) => {
-  const token = req.headers.authorization.split(' ')[1]
-  const user = jwt.verify(token, process.env.JWT_SECRET)
-  // console.log(token)
-  req.user = user
-  next()
-}
+// exports.requireSignin = (req, res, next) => {
+//   const token = req.headers.authorization.split(' ')[1]
+//   const user = jwt.verify(token, process.env.JWT_SECRET)
+//   // console.log(token)
+//   req.user = user
+//   next()
+// }

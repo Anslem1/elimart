@@ -48,10 +48,10 @@ exports.signIn = async (req, res) => {
   })
 }
 
-exports.requireSignin = (req, res, next) => {
-  const token = req.headers.authorization.split(' ')[1]
-  const user = jwt.verify(token, process.env.JWT_SECRET)
-  // console.log(token)
-  req.user = user
-  next()
-}
+// exports.requireSignin = (req, res, next) => {
+//   const token = req.headers.authorization.split(' ')[1]
+//   const user = jwt.verify(token, process.env.JWT_SECRET)
+//   // console.log(token)
+//   req.user = user
+//   next()
+// }

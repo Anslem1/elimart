@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const bcrypt = require('bcrypt')
+
 
 const userSchema = new Schema(
   {
@@ -59,10 +59,6 @@ const userSchema = new Schema(
   }
 )
 
-// userSchema.methods = {
-//   authenticate: function (password) {
-//     return 
-//   }
-// }
+
 
 module.exports = mongoose.model('User', userSchema)

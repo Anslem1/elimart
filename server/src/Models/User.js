@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const bcrypt = require('bcrypt')
 
 const userSchema = new Schema(
   {
@@ -34,7 +35,8 @@ const userSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      lowercase: true
+      lowercase: true,
+      unique: true
     },
     password: {
       type: String,
@@ -57,6 +59,10 @@ const userSchema = new Schema(
   }
 )
 
-// userSchema.virtual('password')
+// userSchema.methods = {
+//   authenticate: function (password) {
+//     return 
+//   }
+// }
 
 module.exports = mongoose.model('User', userSchema)

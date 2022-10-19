@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
-const User = require('../../Models/User')
+const User = require('../../../Models/User')
+const jwt = require('jsonwebtoken')
 
 exports.signUp = async (req, res) => {
   try {
@@ -12,7 +13,7 @@ exports.signUp = async (req, res) => {
           .status(500)
           .json({ message: 'Something went wrong, try again' })
       else {
-        const { firstName, lastName, email, password } = req.body
+        const { firstName, lastName, email } = req.body
         const newUser = new User({
           firstName,
           lastName,
@@ -35,23 +36,25 @@ exports.signUp = async (req, res) => {
 }
 
 exports.signIn = async (req, res) => {
-  //   try {
-  //     User.findOne({ email: req.body.email }).exec((error, user) => {
-  //       if (!user)
-  //         return res.status(404).json({ message: 'Wrong username or password' })
-  //       else if (error)
-  //         return res
-  //           .status(500)
-  //           .json({ message: 'Something went wrong, try again' })
-  //     })
-  //     const validated = await bcrypt.compare(req.body.password, email.password)
-  //     const { password, ...userCreds } = email._doc
-  //     if (validated) {
-  //       res.status(200).json({ userCreds })
-  //     } else {
-  //       res.status(400).json({ message: 'Wrong username or password' })
-  //     }
-  //   } catch (error) {
-  //     res.status(500).json(error)
-  //   }
+  User.findOne({ email: req.body.email }).exec(async (error, user) => {
+    if (error) res.status(400).json({ error: 'Something went wrong' })
+    if (user) {
+      const validated = await bcrypt.compare(req.body.password, user.password)
+      if (validated) {
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+          expiresIn: '1h'
+        })
+        const { password, ...userCreds } = user._doc
+        return res.status(200).json({ token, user: userCreds })
+      } else res.status(400).json({ message: 'Wrong username or password' })
+    } else res.status(400).json({ message: 'Wrong username or password' })
+  })
+}
+
+exports.requireSignin = (req, res, next) => {
+  const token = req.headers.authorization.split(' ')[1]
+  const user = jwt.verify(token, process.env.JWT_SECRET)
+  // console.log(token)
+  req.user = user
+  next()
 }

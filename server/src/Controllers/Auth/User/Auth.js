@@ -1,38 +1,35 @@
 const bcrypt = require('bcrypt')
 const User = require('../../../Models/User')
 const jwt = require('jsonwebtoken')
+const { validationResult } = require('express-validator')
 
 exports.signUp = async (req, res) => {
-  try {
-    const salt = await bcrypt.genSalt(12)
-    const hashedPassword = await bcrypt.hash(req.body.password, salt)
-    User.findOne({ email: req.body.email }).exec((error, user) => {
-      if (user) return res.status(403).json({ message: 'Email already exists' })
-      else if (error)
-        return res
-          .status(500)
-          .json({ message: 'Something went wrong, try again' })
-      else {
-        const { firstName, lastName, email } = req.body
-        const newUser = new User({
-          firstName,
-          lastName,
-          email,
-          password: hashedPassword,
-          fullName: firstName + ' ' + lastName,
-          username: Math.random().toString()
-        })
-        newUser.save((error, data) => {
-          if (error)
-            return res.status(500).json({ message: 'Something went wrong' })
-          else if (data)
-            return res.status(201).json({ message: 'User has been created' })
-        })
-      }
-    })
-  } catch (error) {
-    res.status(500).json(error)
-  }
+  const salt = await bcrypt.genSalt(12)
+  const hashedPassword = await bcrypt.hash(req.body.password, salt)
+  User.findOne({ email: req.body.email }).exec((error, user) => {
+    if (user) return res.status(403).json({ message: 'Email already exists' })
+    else if (error)
+      return res
+        .status(500)
+        .json({ message: 'Something went wrong, try again' })
+    else {
+      const { firstName, lastName, email } = req.body
+      const newUser = new User({
+        firstName,
+        lastName,
+        email,
+        password: hashedPassword,
+        fullName: firstName + ' ' + lastName,
+        username: Math.random().toString()
+      })
+      newUser.save((error, data) => {
+        if (error)
+          return res.status(500).json({ message: 'Something went wrong' })
+        else if (data)
+          return res.status(201).json({ message: 'User has been created' })
+      })
+    }
+  })
 }
 
 exports.signIn = async (req, res) => {

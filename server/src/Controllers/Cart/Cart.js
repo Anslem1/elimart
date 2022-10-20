@@ -16,13 +16,13 @@ exports.addItemsToCart = (req, res) => {
           },
           {
             $set: {
-              cartItems: {
+              'cartItems.$': {
                 ...req.body.cartItems,
                 quantity: isProduct.quantity + req.body.cartItems.quantity
-                  }
-            
               }
-          }
+            }
+          },
+          { new: true }
         ).exec((error, cartItems) => {
           if (error) return res.status(400).json({ error })
           if (cartItems) return res.status(200).json({ cart: cartItems })

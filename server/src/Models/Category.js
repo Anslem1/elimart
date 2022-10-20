@@ -5,6 +5,7 @@ const categoryScema = new Schema(
   {
     name: { type: String, required: true, trim: true },
     slug: { type: String, required: true, trim: true, unique: true },
+    categoryImage: { type: String },
     parentId: { type: String }
   },
   { timestamps: true }

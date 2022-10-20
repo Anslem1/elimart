@@ -25,7 +25,7 @@ exports.signUp = async (req, res) => {
         })
         newUser.save((error, data) => {
           if (error)
-            return res.status(500).json({ message: 'Something went wrong' })
+             res.status(500).json({ message: 'Something went wrong' })
           else if (data)
             return res.status(200).json({ message: 'Admin has been created' })
         })

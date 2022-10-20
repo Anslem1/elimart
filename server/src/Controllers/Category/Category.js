@@ -25,6 +25,13 @@ exports.createCategories = (req, res) => {
     name: req.body.name,
     slug: slugify(req.body.name)
   }
+
+  let categoryImageUrl
+  if (req.file) {
+    categoryImageUrl = process.env.API + '/public/' + req.file.filename
+    categoryObject.categoryImage = categoryImageUrl
+  }
+
   if (req.body.parentId) {
     categoryObject.parentId = req.body.parentId
   }

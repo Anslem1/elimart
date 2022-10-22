@@ -2,6 +2,8 @@ const express = require('express')
 const env = require('dotenv')
 const mongoose = require('mongoose')
 const path = require('path')
+const cors = require('cors')
+
 
 const adminRoutes = require('./src/Routes/Auth/Admin/admin.auth')
 const userRoutes = require('./src/Routes/Auth/User/user.auth')
@@ -22,7 +24,7 @@ mongoose
   .then(console.log('Mongo working?'))
   .catch(err => console.log(err))
 
-
+app.use(cors())
 app.use('/api/auth/admin', adminRoutes)
 app.use('/api/auth', userRoutes)
 app.use('/api/categories', categoryRoutes)

@@ -1,35 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
-.home-header-text{
-    text-align: center;
-    font-family:Open sans ;
-    font-weight: 500;
+.home-header-text {
+     text-align: center;
+     font-family: Open sans;
+     font-weight: 500;
+     top: 20px;
+     position: relative;
 }
 
-
-.home-container{
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    align-items: center;
-    justify-content: center;
-
-
+.home-container {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
 }
 
-
-.home-container p{
-font-family: Roboto;
-text-align: center;
-width: 50%;
-
+.home-container p {
+     font-family: Roboto;
+     text-align: center;
+     width: 50%;
 }
 
 @media screen and (max-width: 1300px) {
-   .home-container p{
-font-family: Roboto;
-text-align: center;
-width: 90%;
-
-} 
+     .home-container p {
+          font-family: Roboto;
+          text-align: center;
+          width: 90%;
+     }
 }

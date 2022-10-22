@@ -2,7 +2,7 @@ const Cart = require('../../Models/Cart')
 
 exports.addItemsToCart = (req, res) => {
   Cart.findOne({ user: req.user._id }).exec((error, cart) => {
-    if (error) return res.status(400).json({ error })
+    if (error) res.status(400).json({ error })
     if (cart) {
       //if CART EXISTS UPDATE CART
       const product = req.body.cartItems.product
@@ -24,8 +24,8 @@ exports.addItemsToCart = (req, res) => {
           },
           { new: true }
         ).exec((error, cartItems) => {
-          if (error) return res.status(400).json({ error })
-          if (cartItems) return res.status(200).json({ cart: cartItems })
+          if (error) res.status(400).json({ error })
+          if (cartItems) res.status(200).json({ cart: cartItems })
         })
       } else {
         Cart.findOneAndUpdate({
@@ -34,8 +34,8 @@ exports.addItemsToCart = (req, res) => {
             cartItems: req.body.cartItems
           }
         }).exec((error, cartItems) => {
-          if (error) return res.status(400).json({ error })
-          if (cartItems) return res.status(200).json({ cart: cartItems })
+          if (error) res.status(400).json({ error })
+          if (cartItems) res.status(200).json({ cart: cartItems })
         })
       }
     } else {
@@ -45,8 +45,8 @@ exports.addItemsToCart = (req, res) => {
         cartItems: [req.body.cartItems]
       })
       newCart.save((error, cart) => {
-        if (error) return res.status(400).json({ error })
-        if (cart) return res.status(200).json({ cart })
+        if (error) res.status(400).json({ error })
+        if (cart) res.status(200).json({ cart })
       })
     }
   })

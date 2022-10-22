@@ -11,6 +11,7 @@
      justify-content: space-around;
      box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.205);
      height: 70px;
+     /* position: absolute; */
 }
 
 .name p {
@@ -39,25 +40,30 @@
 .signup {
      background-color: rgb(102, 181, 238);
 }
-.li{
-    list-style: none;
+.li {
+     list-style: none;
 }
 
 .link {
-    text-decoration: none;
-    color: black;
+     text-decoration: none;
+     color: black;
+     cursor: pointer;
 }
 
+.fa-cart-plus {
+     font-size: 20px;
+     margin-right: 5px;
+}
 
 @media screen and (max-width: 800px) {
      .name {
-          justify-content: space-around;
+          justify-content: space-between;
      }
 
      .name p {
           /* font-family: 10px; */
           margin: 10px;
-          font-size: 16px;
+          font-size: 17px;
      }
      .signin,
      .signup {

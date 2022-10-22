@@ -1,21 +1,20 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import MobileSideBar from '../../Components/Sidebar/MobileSideBar'
+import SidebarNav from '../../Components/Sidebar/Sidebar'
 import './Home.css'
 
 function Home () {
+
+  const auth = useSelector(state => state.auth)
   return (
     <>
-      <div className='home-container'>
-        <h1 className='home-header-text'>Welcome to Elimart Admin Dashboard</h1>
-
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-          mollitia, molestiae quas vel sint commodi repudiandae consequuntur
-          voluptatum laborum numquam blanditiis harum quisquam eius sed odit
-          fugiat iusto fuga praesentium optio, eaque rerum! Provident similique
-          accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut
-          molestias architecto voluptate aliquam nihil, eveniet aliquid culpa
-          officia aut! Impedit sit sunt quaerat, odit,
-        </p>
+      <div className='layout-container'>
+        <SidebarNav />
+        <MobileSideBar />
+        <div className='home-container'>
+          <h1 className='home-header-text'>Welcome, {auth.user.username}</h1>
+        </div>
       </div>
     </>
   )

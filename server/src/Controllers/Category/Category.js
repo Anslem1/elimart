@@ -37,14 +37,14 @@ exports.createCategories = (req, res) => {
   }
   const cate = new Category(categoryObject)
   cate.save((error, category) => {
-    if (error) return res.status(400).json({ error })
-    if (category) return res.status(200).json({ category })
+    if (error) res.status(400).json({ error })
+    if (category) res.status(200).json({ category })
   })
 }
 
 exports.getAllCategories = (req, res) => {
   Category.find({}).exec((error, categories) => {
-    if (error) return res.status(400).json({ error })
+    if (error) res.status(400).json({ error })
     if (categories) {
       const categoryLists = addCategories(categories)
       res.status(200).json({ categoryLists })

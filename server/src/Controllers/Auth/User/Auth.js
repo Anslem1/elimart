@@ -7,11 +7,9 @@ exports.signUp = async (req, res) => {
   const salt = await bcrypt.genSalt(12)
   const hashedPassword = await bcrypt.hash(req.body.password, salt)
   User.findOne({ email: req.body.email }).exec((error, user) => {
-    if (user) return res.status(403).json({ message: 'Email already exists' })
+    if (user) res.status(400).json({ message: 'Email already exists' })
     else if (error)
-      return res
-        .status(500)
-        .json({ message: 'Something went wrong, try again' })
+      res.status(500).json({ message: 'Something went wrong, try again' })
     else {
       const { firstName, lastName, email } = req.body
       const newUser = new User({
@@ -20,13 +18,14 @@ exports.signUp = async (req, res) => {
         email,
         password: hashedPassword,
         fullName: firstName + ' ' + lastName,
-        username: Math.random().toString()
+        username: req.body.username
+          ? req.body.username
+          : Math.random().toString()
       })
       newUser.save((error, data) => {
-        if (error)
-          return res.status(500).json({ message: 'Something went wrong' })
+        if (error) res.status(500).json({ message: 'Something went wrong' })
         else if (data)
-          return res.status(201).json({ message: 'User has been created' })
+          res.status(201).json({ message: 'User has been created' })
       })
     }
   })
@@ -42,11 +41,11 @@ exports.signIn = async (req, res) => {
           { _id: user._id, role: user.role },
           process.env.JWT_SECRET,
           {
-            expiresIn: '1h'
+            expiresIn: '1000d'
           }
         )
         const { password, ...userCreds } = user._doc
-        return res.status(200).json({ token, user: userCreds })
+        res.status(200).json({ token, user: userCreds })
       } else res.status(400).json({ message: 'Wrong username or password' })
     } else res.status(400).json({ message: 'Wrong username or password' })
   })

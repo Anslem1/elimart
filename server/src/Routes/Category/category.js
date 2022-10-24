@@ -31,6 +31,6 @@ router.post(
   upload.single('categoryImage'),
   createCategories
 )
-router.get('/getcategories', getAllCategories)
+router.get('/get', getAllCategories)
 
 module.exports = router

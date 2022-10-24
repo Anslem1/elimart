@@ -10,6 +10,7 @@ import { isUserSignedin } from './Redux/actions'
 import { useEffect } from 'react'
 import Orders from './Pages/Orders/Orders'
 import Products from './Pages/Products/Product'
+import Category from './Pages/Category/Category'
 // import Product from '../../server/src/Models/Product';
 
 function App () {
@@ -30,6 +31,7 @@ function App () {
         <Route path='/' exact element={token ? <Home /> : <Signin />} />
         <Route path='/products' element={token ? <Products /> : <Signin />} />
         <Route path='/orders' element={token ? <Orders /> : <Signin />} />
+        <Route path='/category' element={token ? <Category /> : <Signin />} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>

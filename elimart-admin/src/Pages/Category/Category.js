@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import MobileSideBar from '../../Components/Sidebar/MobileSideBar'
 import SidebarNav from '../../Components/Sidebar/Sidebar'
-import './Product.css'
+import { addCategory, getAllCategories } from '../../Redux/actions'
 import Modal from 'react-modal'
-import { useDispatch, useSelector } from 'react-redux'
-import { addProduct } from '../../Redux/actions';
 
+import './Category.css'
 const customStyles = {
   content: {
     top: '50%',
@@ -17,19 +17,15 @@ const customStyles = {
     transform: 'translate(-50%, -50%)'
   }
 }
+function Category() {
+    const disatch = useDispatch()
+  const [categoryName, setcategoryName] = useState('')
+  const [categoryImage, setcategoryImage] = useState('')
+  const [parentCategoryId, setParentCategoryId] = useState('')
 
-function Product () {
-  const [name, setName] = useState('')
-  const [price, setPrice] = useState('')
-  const [description, setDescription] = useState('')
-  const [quantity, setQuantity] = useState('')
-  const [productPicture, setProductPicture] = useState([])
-  const [category, setCategory] = useState('')
   const categories = useSelector(state => state.categories)
-
   const dispatch = useDispatch()
 
-  const token = localStorage.getItem('token')
   const [open, setOpen] = useState(false)
   const toggleModal = () => setOpen(isOpen => !isOpen)
   const [modalIsOpen, setIsOpen] = React.useState(false)
@@ -42,24 +38,31 @@ function Product () {
   }
   function closeModal () {
     const form = new FormData()
-    form.append('name', name)
-    form.append('price', price)
-    form.append('description', description)
-    form.append('category', category)
-    form.append('quantity', quantity)
-    for (let picture of productPicture) {
-      form.append('productPicture', picture)
-      
-    }
-    dispatch(addProduct(form))
+    form.append('name', categoryName)
+    form.append('parentId', parentCategoryId)
+    form.append('categoryImage', categoryImage)
+      dispatch(addCategory(form))
     setIsOpen(false)
   }
 
-  function handleProductPicture (e) {
-    setProductPicture([...productPicture, e.target.files[0]])
+  useEffect(() => {
+    dispatch(getAllCategories())
+  }, [])
+
+  function renderCategories (categories) {
+    let allCategories = []
+    for (let category of categories) {
+      allCategories.push(
+        <li key={category.name}>
+          {category.name}{' '}
+          {category.children.length > 0 && (
+            <ul>{renderCategories(category.children)}</ul>
+          )}
+        </li>
+      )
+    }
+    return allCategories
   }
-
-
 
   function categoryOptions (categoriesOptions, options = []) {
     for (let categoryOption of categoriesOptions) {
@@ -72,23 +75,27 @@ function Product () {
     return options
   }
 
+  function handleCategoryImage (e) {
+    setcategoryImage(e.target.files[0])
+  }
+
   return (
-    <main className='layout-container'>
-      <SidebarNav />
-      <MobileSideBar />
-      <div className='home-container'>
-        <h1 className='home-header-text'>Products</h1>
+    <>
+      <main className='layout-container'>
+        <SidebarNav />
+        <MobileSideBar />
         <div className='category-container'>
           <div className='category-header-container'>
+            <h1 className='category-header-text'>Category</h1>
             <button className='add-category-btn' onClick={openModal}>
               <i className='fa-solid fa-plus'></i>
               Create
             </button>
           </div>
           <div>
-            {/* <ul className='category-ul'>
+            <ul className='category-ul'>
               {renderCategories(categories.categories)}
-            </ul> */}
+            </ul>
             <Modal
               isOpen={modalIsOpen}
               onAfterOpen={afterOpenModal}
@@ -98,49 +105,22 @@ function Product () {
               ariaHideApp={false}
             >
               <div className='modal-container'>
-                <h2 className='add-category-header'>Add new product</h2>
+                <h2 className='add-category-header'>Add new category</h2>
                 <div className='category-name-container'>
-                  <label>Product name</label>
+                  <label>Category name</label>
                   <input
                     type='text'
-                    placeholder='Product name'
-                    value={name}
-                    onChange={e => setName(e.target.value)}
-                  />
-                </div>
-                <div className='category-name-container'>
-                  <label>Product price</label>
-                  <input
-                    type='text'
-                    placeholder='Product price'
-                    value={price}
-                    onChange={e => setPrice(e.target.value)}
-                  />
-                </div>
-                <div className='category-name-container'>
-                  <label>Product description</label>
-                  <input
-                    type='text'
-                    placeholder='Product description'
-                    value={description}
-                    onChange={e => setDescription(e.target.value)}
-                  />
-                </div>
-                <div className='category-name-container'>
-                  <label>Product quantity</label>
-                  <input
-                    type='text'
-                    placeholder='Product quantity'
-                    value={quantity}
-                    onChange={e => setQuantity(e.target.value)}
+                    placeholder='Category name'
+                    value={categoryName}
+                    onChange={e => setcategoryName(e.target.value)}
                   />
                 </div>
                 <div className='category-name-container'>
                   <label>Category</label>
 
                   <select
-                    value={category}
-                    onChange={e => setCategory(e.target.value)}
+                    value={parentCategoryId}
+                    onChange={e => setParentCategoryId(e.target.value)}
                   >
                     <option>--select category--</option>
                     {categoryOptions(categories.categories).map(
@@ -157,16 +137,10 @@ function Product () {
                     )}
                   </select>
                 </div>
-
-                {productPicture.length > 0
-                  ? productPicture.map((picture, index) => {
-                      return <div key={index}>{picture.name}</div>
-                    })
-                  : null}
                 <input
                   type='file'
                   name='categoryImage'
-                  onChange={handleProductPicture}
+                  onChange={handleCategoryImage}
                 />
               </div>
               <button onClick={closeModal} className='add-category-btn'>
@@ -175,9 +149,9 @@ function Product () {
             </Modal>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   )
 }
 
-export default Product
+export default Category

@@ -22,6 +22,11 @@ function SidebarNav () {
               Orders
             </Link>
           </li>
+          <li className='li'>
+            <Link className='link' to={'/category'}>
+              Category
+            </Link>
+          </li>
         </ul>
       </div>
     </>

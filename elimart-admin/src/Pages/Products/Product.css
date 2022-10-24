@@ -1,0 +1,14 @@
+.home-header-text {
+     text-align: center;
+     font-family: Open sans;
+     font-weight: 500;
+     top: 20px;
+     position: relative;
+}
+
+.category-name-container label{
+color: rgb(147, 147, 147);
+}
+.category-name-container input::placeholder{
+color: rgb(0, 0, 0);
+}

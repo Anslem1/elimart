@@ -1,0 +1,76 @@
+.category-header-text {
+     text-align: center;
+     font-family: Open sans;
+     font-weight: 500;
+     position: relative;
+}
+.add-category-header{
+     font-size: 30px;
+     font-family: Roboto;
+     font-weight: 400;
+}
+
+.category-header-container {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     margin: 20px;
+}
+
+.add-category-btn {
+     border: none;
+     border-radius: 10px;
+     padding: 10px 20px;
+     display: flex;
+     gap: 5px;
+     align-items: center;
+     cursor: pointer;
+     color: white;
+     background-color: rgb(2, 90, 128);
+     margin-top: 10px;
+}
+.category-ul {
+     display: grid;
+margin: 50px;
+}
+
+.category-name-container {
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+}
+.category-name-container label {
+     font-family: roboto;
+     font-size: 17px;
+     font-weight: 400;
+}
+
+.modal-container {
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+}
+
+.category-name-container input {
+     border-radius: 7px;
+     outline-color: rgb(25, 116, 226);
+     padding: 10px;
+     font-family: roboto;
+     border: 1px solid gray;
+}
+.category-name-container select {
+     border: 1px solid gray;
+     border-radius: 7px;
+     outline-color: rgb(25, 116, 226);
+     padding: 10px;
+}
+
+
+@media screen and (max-width: 600px) {
+.category-ul {
+     display: grid;
+
+}
+
+}

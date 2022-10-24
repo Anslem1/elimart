@@ -1,12 +1,17 @@
 .layout-container {
      display: grid;
-     grid-template-columns: 0.4fr 2fr;
      height: 100vh;
+     /* display: flex; */
+     /* flex-flow: row wrap; */
+
+     grid-template-columns: 0.4fr 2fr;
 }
 .ul {
      display: flex;
      flex-direction: column;
      gap: 20px;
+     position: absolute;
+     position: absolute;
 }
 
 .sidebar-container {

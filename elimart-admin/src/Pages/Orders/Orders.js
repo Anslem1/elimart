@@ -1,6 +1,7 @@
 import React from 'react'
 import MobileSideBar from '../../Components/Sidebar/MobileSideBar';
 import SidebarNav from '../../Components/Sidebar/Sidebar';
+import './Orders.css'
 
 function Orders() {
   const token = localStorage.getItem('token')

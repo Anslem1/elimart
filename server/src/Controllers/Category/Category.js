@@ -14,6 +14,7 @@ function addCategories (categories, parentId = null) {
       _id: cate._id,
       name: cate.name,
       slug: cate.slug,
+      parentId: cate.parentId,
       children: addCategories(categories, cate._id)
     })
   }
@@ -46,8 +47,8 @@ exports.getAllCategories = (req, res) => {
   Category.find({}).exec((error, categories) => {
     if (error) res.status(400).json({ error })
     if (categories) {
-      const categoryLists = addCategories(categories)
-      res.status(200).json({ categoryLists })
+      const categoryList = addCategories(categories)
+      res.status(200).json({ categoryList })
     }
   })
 }

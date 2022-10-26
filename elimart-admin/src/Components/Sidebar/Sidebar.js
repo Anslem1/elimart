@@ -6,7 +6,7 @@ function SidebarNav () {
   return (
     <>
       <div className='sidebar-container'>
-        <ul className='ul'>
+        <div className='ul'>
           <li className='li'>
             <Link className='link' to={'/'}>
               Home
@@ -27,7 +27,7 @@ function SidebarNav () {
               Category
             </Link>
           </li>
-        </ul>
+        </div>
       </div>
     </>
   )

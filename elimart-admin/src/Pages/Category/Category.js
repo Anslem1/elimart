@@ -4,6 +4,8 @@ import MobileSideBar from '../../Components/Sidebar/MobileSideBar'
 import SidebarNav from '../../Components/Sidebar/Sidebar'
 import { addCategory, getAllCategories } from '../../Redux/actions'
 import Modal from 'react-modal'
+// import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 import './Category.css'
 const customStyles = {
@@ -17,8 +19,8 @@ const customStyles = {
     transform: 'translate(-50%, -50%)'
   }
 }
-function Category() {
-    const disatch = useDispatch()
+function Category () {
+  const disatch = useDispatch()
   const [categoryName, setcategoryName] = useState('')
   const [categoryImage, setcategoryImage] = useState('')
   const [parentCategoryId, setParentCategoryId] = useState('')
@@ -34,27 +36,40 @@ function Category() {
     setIsOpen(true)
   }
   function afterOpenModal () {
-    subtitle.style.color = '#f00'
+    subtitle.styles.color = '#f00'
   }
-  function closeModal () {
-    const form = new FormData()
-    form.append('name', categoryName)
-    form.append('parentId', parentCategoryId)
-    form.append('categoryImage', categoryImage)
-      dispatch(addCategory(form))
+
+  function closeModalWithoutSubmit () {
     setIsOpen(false)
   }
 
-  useEffect(() => {
-    dispatch(getAllCategories())
-  }, [])
+  function closeModal () {
+    const form = new FormData()
+
+    form.append('name', categoryName)
+    form.append('parentId', parentCategoryId)
+    form.append('categoryImage', categoryImage)
+
+    if (categoryName || parentCategoryId || categoryImage) {
+      dispatch(addCategory(form))
+      setParentCategoryId('')
+      setcategoryName('')
+      setcategoryImage('')
+      setIsOpen(false)
+    } else {
+      setParentCategoryId('')
+      setcategoryName('')
+      setcategoryImage('')
+      setIsOpen(false)
+    }
+  }
 
   function renderCategories (categories) {
     let allCategories = []
     for (let category of categories) {
       allCategories.push(
         <li key={category.name}>
-          {category.name}{' '}
+          {category.name}
           {category.children.length > 0 && (
             <ul>{renderCategories(category.children)}</ul>
           )}
@@ -99,7 +114,7 @@ function Category() {
             <Modal
               isOpen={modalIsOpen}
               onAfterOpen={afterOpenModal}
-              onRequestClose={closeModal}
+              onRequestClose={closeModalWithoutSubmit}
               style={customStyles}
               contentLabel='Example Modal'
               ariaHideApp={false}

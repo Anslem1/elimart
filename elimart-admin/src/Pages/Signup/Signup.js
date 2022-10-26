@@ -27,12 +27,14 @@ function Signup () {
     dispatch(SignUpUser(user))
   }
 
-  // if (user.signedUp === true) {
-  //   return <Navigate to='/' replace />
-  // }
 
   return (
     <>
+      <div className='sign-up-header'>
+        <h1>
+          Welcome to Elimart. Shop more, pay less.
+        </h1>
+      </div>
       <form className='signup-container' action='' onSubmit={userSignin}>
         <div className='testin'>
           <div className='fullname'>

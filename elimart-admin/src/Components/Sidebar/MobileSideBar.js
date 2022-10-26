@@ -5,7 +5,7 @@ function MobileSideBar () {
   return (
     <>
       <div className='mobile-sidebar-container'>
-        <ul className='ul'>
+        <div className='ul'>
           <li className='mobile-li'>
             <Link className='link' to={'/'}>
               <i className='fa-solid fa-house'></i>
@@ -26,7 +26,7 @@ function MobileSideBar () {
               <i className='fa-solid fa-cubes'></i>
             </Link>
           </li>
-        </ul>
+        </div>
       </div>
     </>
   )

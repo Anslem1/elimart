@@ -6,6 +6,8 @@ import store from './Redux/store'
 import { BrowserRouter } from 'react-router-dom'
 import { ProSidebarProvider } from 'react-pro-sidebar'
 
+
+
 window.store = store
 
 const root = ReactDOM.createRoot(document.getElementById('root'))

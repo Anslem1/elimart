@@ -8,35 +8,44 @@ const initialState = {
 
 function pushCategoryToList (parentId, categories, category) {
   let allCategories = []
+  if (parentId === undefined) {
+    return [
+      ...categories,
+      {
+        _id: category._id,
+        name: category.name,
+        slug: category.slug,
+        children: []
+      }
+    ]
+  }
   for (let cate of categories) {
     if (cate._id == parentId) {
       allCategories.push({
         ...cate,
-        children:
-          cate.children && cate.children.length > 0
-            ? pushCategoryToList(
-                parentId,
-                [
-                  ...cate.children,
-                  {
-                    _id: category._id,
-                    name: category.name,
-                    slug: category.slug,
-                    parentId: category.parentId,
-                    children: category.children
-                  }
-                ],
-                category
-              )
-            : []
+        children: cate.children
+          ? pushCategoryToList(
+              parentId,
+              [
+                ...cate.children,
+                {
+                  _id: category._id,
+                  name: category.name,
+                  slug: category.slug,
+                  parentId: category.parentId,
+                  children: category.children
+                }
+              ],
+              category
+            )
+          : []
       })
     } else {
       allCategories.push({
         ...cate,
-        children:
-          cate.children && cate.children.length > 0
-            ? pushCategoryToList(parentId, cate.children, category)
-            : []
+        children: cate.children
+          ? pushCategoryToList(parentId, cate.children, category)
+          : []
       })
     }
   }
@@ -59,6 +68,7 @@ export default function (state = initialState, action) {
       break
     case getCategoryConstants.ADD_CATEGORIES_SUCCESS:
       const category = action.payload.category
+      console.log(category)
 
       const updatedCategories = pushCategoryToList(
         category.parentId,
@@ -74,8 +84,8 @@ export default function (state = initialState, action) {
     case getCategoryConstants.GET_CATEGORIES_FAILURE:
       state = {
         ...initialState
-      };
-      break;
+      }
+      break
   }
   return state
 }

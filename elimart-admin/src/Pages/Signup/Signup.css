@@ -5,6 +5,19 @@
      align-items: center;
      height: 80vh;
 }
+.sign-up-header {
+     display: flex;
+     justify-content: center;
+     margin-top: 20px;
+
+}
+
+.sign-up-header h1 {
+     width: 60%;
+     text-align: center;
+font-family:Open sans;
+font-weight: 500;
+}
 
 .fullname {
      display: flex;
@@ -79,8 +92,7 @@
           width: 100%;
      }
 
-     .testin{
-     margin: 0;
+     .testin {
+          margin: 0;
      }
 }
-

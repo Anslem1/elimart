@@ -1,13 +1,14 @@
 import axios from '../../helpers/axios'
 import { getCategoryConstants } from '../constants/constants'
 
-export function getAllCategories () {
+export function getAllCategory () {
   return async dispatch => {
     const res = await axios.get('/categories/get')
     console.log(res)
     dispatch({ type: getCategoryConstants.GET_CATEGORIES_REQUEST })
     if (res.status === 200) {
       const { categoryList } = res.data
+      console.log(categoryList, 'CATEGORYLIST')
       dispatch({
         type: getCategoryConstants.GET_CATEGORIES_SUCCESS,
         payload: { categories: categoryList }
@@ -27,12 +28,12 @@ export function addCategory (form) {
   return async dispatch => {
     dispatch({ type: getCategoryConstants.ADD_CATEGORIES_REQUEST })
 
-      const res = await axios.post('/categories/create', form)
-      console.log(res)
+    const res = await axios.post('/categories/create', form)
+    console.log(res)
     if (res.status === 200) {
       dispatch({
         type: getCategoryConstants.ADD_CATEGORIES_SUCCESS,
-        payload:{category: res.data.category}
+        payload: { category: res.data.category }
       })
     }
   }

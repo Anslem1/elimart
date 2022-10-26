@@ -4,7 +4,8 @@ import SidebarNav from '../../Components/Sidebar/Sidebar'
 import './Product.css'
 import Modal from 'react-modal'
 import { useDispatch, useSelector } from 'react-redux'
-import { addProduct } from '../../Redux/actions';
+import { addProduct } from '../../Redux/actions'
+import Producttable from './Producttable'
 
 const customStyles = {
   content: {
@@ -49,17 +50,27 @@ function Product () {
     form.append('quantity', quantity)
     for (let picture of productPicture) {
       form.append('productPicture', picture)
-      
     }
-    dispatch(addProduct(form))
+    if (
+      name ||
+      price ||
+      description ||
+      category ||
+      quantity ||
+      productPicture.length === 0
+    ) {
+      dispatch(addProduct(form))
+      setIsOpen(false)
+    } else setIsOpen(false)
+  }
+
+  function closeModalWithoutSubmit () {
     setIsOpen(false)
   }
 
   function handleProductPicture (e) {
     setProductPicture([...productPicture, e.target.files[0]])
   }
-
-
 
   function categoryOptions (categoriesOptions, options = []) {
     for (let categoryOption of categoriesOptions) {
@@ -72,27 +83,26 @@ function Product () {
     return options
   }
 
+
+
   return (
-    <main className='layout-container'>
-      <SidebarNav />
-      <MobileSideBar />
-      <div className='home-container'>
-        <h1 className='home-header-text'>Products</h1>
-        <div className='category-container'>
+    <>
+      <main className='layout-container'>
+        <SidebarNav />
+        <MobileSideBar />
+        <div className='home-container'>
+          <h1 className='home-header-text'>Products</h1>
           <div className='category-header-container'>
             <button className='add-category-btn' onClick={openModal}>
               <i className='fa-solid fa-plus'></i>
               Create
             </button>
           </div>
-          <div>
-            {/* <ul className='category-ul'>
-              {renderCategories(categories.categories)}
-            </ul> */}
+          <div className='table-container'>
             <Modal
               isOpen={modalIsOpen}
+              onRequestClose={closeModalWithoutSubmit}
               onAfterOpen={afterOpenModal}
-              onRequestClose={closeModal}
               style={customStyles}
               contentLabel='Example Modal'
               ariaHideApp={false}
@@ -173,10 +183,11 @@ function Product () {
                 Add
               </button>
             </Modal>
+            <Producttable />
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   )
 }
 

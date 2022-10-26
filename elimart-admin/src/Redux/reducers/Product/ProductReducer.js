@@ -1,32 +1,19 @@
+import { productConstants } from '../../actions/constants/constants'
+
 const initialState = {
-  token: null,
-  user: {
-    name: '',
-    price: '',
-    quantity: '',
-    description: '',
-    productPictures: []
-  },
-  authenticated: false,
-  authenticating: false,
-  signingOut: false,
-  signedOut: false,
-  error: null,
-  message: ''
+  products: []
 }
 
-
 export default (state = initialState, action) => {
-    console.log(action)
-
-    switch (action.type) {
-        case value:
-            
-            break;
-    
-        default:
-            break;
-    }
-
-
+  console.log(action)
+  switch (action.type) {
+    case productConstants.GET_ALL_PRODUCTS_SUCCESS:
+      state = {
+        ...state,
+        products: action.payload.products
+      }
+      break
+  }
+  // console.log(action.payload.produc
+  return state
 }

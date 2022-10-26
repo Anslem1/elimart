@@ -3,15 +3,15 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './Pages/Home/Home'
 import Signin from './Pages/Signin/Signin'
 import Signup from './Pages/Signup/Signup'
-import { ProSidebarProvider } from 'react-pro-sidebar'
+import './App.css'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { isUserSignedin } from './Redux/actions'
+import { getAllCategory, getInitialData, isUserSignedin } from './Redux/actions'
 import { useEffect } from 'react'
 import Orders from './Pages/Orders/Orders'
 import Products from './Pages/Products/Product'
 import Category from './Pages/Category/Category'
-// import Product from '../../server/src/Models/Product';
+// import { getInitialData } from './Redux/actions/initialdata/initialdataAction'
 
 function App () {
   const token = localStorage.getItem('token')
@@ -22,6 +22,11 @@ function App () {
     if (!auth.authenticated) {
       dispatch(isUserSignedin())
     }
+  }, [])
+
+  useEffect(() => {
+    // dispatch(getAllCategory())
+    dispatch(getInitialData())
   }, [])
 
   return (

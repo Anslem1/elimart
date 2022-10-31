@@ -24,13 +24,14 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-router.post(
-  '/create',
-  requireSignin,
-  adminMiddleware,
-  upload.single('categoryImage'),
-  createCategories
-)
-router.get('/get', getAllCategories)
+router
+  .post(
+    '/create',
+    requireSignin,
+    adminMiddleware,
+    upload.single('categoryImage'),
+    createCategories
+  )
+  .get('/get', getAllCategories)
 
 module.exports = router

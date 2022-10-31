@@ -19,7 +19,7 @@
      font-size: 18px;
      display: flex;
      margin-bottom: 10px;
-     color: rgb(176, 176, 176);
+     color: rgb(133, 133, 133);
 }
 .product-content p {
      font-family: Open sans;
@@ -41,6 +41,8 @@
      display: flex;
 }
 
+
+
 .product-image-container {
      width: 100px;
      height: 100px;
@@ -53,3 +55,5 @@
      max-height: 100%;
      object-fit: contain;
 }
+
+

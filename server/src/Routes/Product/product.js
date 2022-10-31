@@ -1,4 +1,4 @@
-const { createProduct } = require('../../Controllers/Products/Products')
+const { createProduct, getProductsBySlug } = require('../../Controllers/Products/Products')
 const multer = require('multer')
 // const upload = multer({ dest: 'uploads/' })
 const shortid = require('shortid')
@@ -23,12 +23,14 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-router.post(
-  '/create',
-  requireSignin,
-  adminMiddleware,
-  upload.array('productPicture'),
-  createProduct
-)
+router
+  .post(
+    '/create',
+    requireSignin,
+    adminMiddleware,
+    upload.array('productPicture'),
+    createProduct
+  )
+  .get('/:slug', getProductsBySlug)
 
 module.exports = router

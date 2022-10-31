@@ -1,0 +1,110 @@
+.all-product-container {
+     position: absolute;
+     top: 70px;
+     width: 100%;
+}
+
+.card {
+     display: flex;
+     justify-content: space-between;
+     margin: 20px;
+     align-items: center;
+}
+
+.card > p {
+     font-family: Open sans;
+}
+.card > button {
+     font-family: Open sans;
+     padding: 5px 25px 5px 25px;
+     border-radius: 20px;
+     border: none;
+     cursor: pointer;
+     background-color: #7c8e09;
+     color: #fff;
+}
+
+.product-container {
+     flex-direction: column;
+     width: 270px;
+     margin: 20px;
+     align-items: flex-start;
+     background-color: rgb(239, 239, 239);
+     border-radius: 20px;
+
+}
+.products {
+     display: flex;
+     overflow-x: auto;
+     -webkit-overflow-scrolling: touch;
+}
+.products::-webkit-scrollbar {
+     display: none;
+}
+
+.product-container > div {
+     margin: 10px;
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+}
+.product-container > div > p {
+     font-family: Open sans;
+     font-size: 13px;
+     border: 1px solid;
+     width: 80px;
+     padding: 4px;
+     border-radius: 20px;
+     text-align: center;
+     vertical-align: middle;
+}
+
+.product-header {
+     display: flex;
+     flex-direction: column;
+     align-items: flex-start;
+     gap: 10px;
+}
+
+.rating {
+     display: flex;
+     gap: 5px;
+}
+
+.product-header > p {
+     overflow: hidden;
+     text-overflow: ellipsis;
+     display: -webkit-box;
+     -webkit-line-clamp: 1;
+     -webkit-box-orient: vertical;
+     font-family: Roboto;
+     font-family: 400;
+}
+.product-img-container > img {
+     width: 217px;
+     height: 217px;
+     margin-top: 20px;
+     object-fit: cover;
+}
+
+@media screen and (max-width: 765px) {
+     .all-product-container {
+          top: 100px;
+     }
+
+     .product-img-container > img {
+          width: 100px;
+          height: 100px;
+          /* object-fit: cover; */
+     }
+
+     .product-container > div {
+          width: 200px;
+     }
+
+     .product-container{
+ width: 200px;
+ margin: 10px;
+     }
+
+}

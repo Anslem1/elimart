@@ -16,25 +16,25 @@ function Producttable () {
   function showroductDetailModal (product) {
     setProductDetailModal(true)
     setProductDetails(product)
-    console.log(product)
   }
 
   const customStyles = {
     content: {
       top: '50%',
       left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      width: '50vh',
+      width: '80%',
       transform: 'translate(-50%, -50%)'
     }
+  }
+  function numberWithCommas (x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   }
 
   function renderProductDetailsModal () {
     if (!productDetails) {
       return null
     }
+
     return (
       <Modal
         isOpen={productDetailModal}
@@ -51,7 +51,7 @@ function Producttable () {
               </div>
               <div className='product-info'>
                 <label htmlFor=''>Price</label>
-                <p>{productDetails.price}</p>
+                <p>₦{numberWithCommas(productDetails.price)}</p>
               </div>
             </div>
 
@@ -80,7 +80,7 @@ function Producttable () {
           <div className='img-content'>
             {productDetails.productPictures.map(picture => {
               return (
-                <div className='product-image-container'>
+                <div className='product-image-container' key={picture.images}>
                   <img src={generatePublicURL(picture.images)} alt='' />
                 </div>
               )
@@ -105,17 +105,17 @@ function Producttable () {
               <th>Category</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className='t-body'>
             {product.products.length > 0
-              ? product.products.map(product => {
+              ? product.products.map((product, index) => {
                   return (
                     <tr
                       onClick={() => showroductDetailModal(product)}
                       key={product._id}
                     >
-                      <td>1</td>
-                      <td>{product.name}</td>
-                      <td>{product.price}</td>
+                      <td>{index + 1}</td>
+                      <td className='table-name'>{product.name}</td>
+                      <td>₦{numberWithCommas(product.price)}</td>
                       {/* <td>{product.description}</td> */}
                       <td>{product.quantity}</td>
                       <td>{product.category.name}</td>

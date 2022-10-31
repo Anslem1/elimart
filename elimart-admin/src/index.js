@@ -4,7 +4,6 @@ import App from './App'
 import { Provider } from 'react-redux'
 import store from './Redux/store'
 import { BrowserRouter } from 'react-router-dom'
-import { ProSidebarProvider } from 'react-pro-sidebar'
 
 
 

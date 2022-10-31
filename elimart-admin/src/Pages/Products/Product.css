@@ -18,6 +18,10 @@
      -webkit-overflow-scrolling: touch;
 }
 
+.category-name-container label{
+     color: rgb(133, 133, 133);
+}
+
 .table {
      --bs-table-border-color: var(--bs-border-color);
      width: 100%;
@@ -46,7 +50,13 @@
 
 .table td {
      font-family: Arial, Helvetica, sans-serif;
+    
 }
+
+/* .table-name{
+     inline-size: 100px;
+
+} */
 
 .container {
      --bs-gutter-x: 1.5rem;
@@ -70,7 +80,7 @@
           width: 100%;
      }
      .home-container {
-          width: 300px;
+          width: 310px;
      }
 }
 @media screen and (min-width: 0px) and (max-width: 280px) {

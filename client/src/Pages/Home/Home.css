@@ -1,0 +1,10 @@
+.home-contaeiner {
+     position: absolute;
+     top: 60px;
+}
+
+@media screen and (max-width: 765px) {
+     .home-contaeiner {
+          top: 90px;
+     }
+}

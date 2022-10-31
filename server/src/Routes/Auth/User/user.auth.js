@@ -7,8 +7,8 @@ const {
 
 const router = require('express').Router()
 
-router.post('/signup', validateSignUpRequest, isRequestValidated, signUp)
-
-router.post('/signin', validateSignInRequest, isRequestValidated, signIn)
+router
+  .post('/signup', validateSignUpRequest, isRequestValidated, signUp)
+  .post('/signin', validateSignInRequest, isRequestValidated, signIn)
 
 module.exports = router

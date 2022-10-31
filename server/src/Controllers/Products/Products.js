@@ -1,5 +1,6 @@
 const Product = require('../../Models/Product')
 const slugify = require('slugify')
+const Category = require('../../Models/Category')
 
 exports.createProduct = (req, res) => {
   //   res.status(200).json({ file: req.files, body: req.body })
@@ -27,4 +28,38 @@ exports.createProduct = (req, res) => {
     if (error) res.status(400).json({ error })
     if (product) res.status(200).json({ product })
   })
+}
+
+exports.getProductsBySlug = (req, res) => {
+  const { slug } = req.params
+  Category.findOne({ slug })
+    .select('_id')
+    .exec((error, category) => {
+      if (error) res.status(400).json({ error })
+      if (category) {
+        Product.find({ category: category._id }).exec((error, products) => {
+          if (error) res.status(400).json({ error })
+          if (products.length > 0)
+            res.status(200).json({
+              products,
+              productsByPrice: {
+                under30k: products.filter(product => product.price <= 30000),
+                under60k: products.filter(
+                  product => product.price > 30000 && product.price <= 50000
+                ),
+                under80k: products.filter(
+                  product => product.price > 50000 && product.price <= 80000
+                ),
+                under100k: products.filter(
+                  product => product.price > 80000 && product.price <= 100000
+                ),
+                under120k: products.filter(
+                  product => product.price > 100000 && product.price <= 120000
+                )
+              }
+            })
+        })
+      }
+    })
+  // return res.status(200).json({ slug })
 }

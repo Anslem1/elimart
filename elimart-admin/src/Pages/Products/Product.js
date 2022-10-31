@@ -14,7 +14,7 @@ const customStyles = {
     right: 'auto',
     bottom: 'auto',
     marginRight: '-50%',
-    width: '50vh',
+    width: '90%',
     transform: 'translate(-50%, -50%)'
   }
 }
@@ -26,7 +26,7 @@ function Product () {
   const [quantity, setQuantity] = useState('')
   const [productPicture, setProductPicture] = useState([])
   const [category, setCategory] = useState('')
-  const categories = useSelector(state => state.categories)
+  const categories = useSelector(state => state.category)
 
   const dispatch = useDispatch()
 

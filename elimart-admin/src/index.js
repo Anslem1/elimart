@@ -7,6 +7,8 @@ import { BrowserRouter } from 'react-router-dom'
 
 
 
+
+
 window.store = store
 
 const root = ReactDOM.createRoot(document.getElementById('root'))

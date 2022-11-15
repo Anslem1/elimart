@@ -18,13 +18,33 @@
      margin: 20px;
 }
 
+.category-modal-container{
+     display: flex;
+     align-items: center;
+   justify-content: space-around;
+}
+
+.edit{
+background-color: rgb(41, 41, 88) !important;
+width: 82px !important;
+}
+
+.delete{
+background-color:#FF0000 !important;
+width: 82px !important;
+}
+
+
+
 .add-category-btn {
      border: none;
      border-radius: 10px;
-     padding: 10px 20px;
+     padding: 10px 10px;
+     width: 82px;
      display: flex;
      gap: 5px;
      align-items: center;
+     justify-content: center;
      cursor: pointer;
      color: white;
      background-color: rgb(2, 90, 128);

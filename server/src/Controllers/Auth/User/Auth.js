@@ -33,28 +33,27 @@ exports.signUp = async (req, res) => {
 
 exports.signIn = async (req, res) => {
   User.findOne({ email: req.body.email }).exec(async (error, user) => {
+    const validated = await bcrypt.compare(req.body.password, user.password)
     if (error) res.status(400).json({ error: 'Something went wrong' })
-    if (user) {
-      const validated = await bcrypt.compare(req.body.password, user.password)
-      if (validated) {
-        const token = jwt.sign(
-          { _id: user._id, role: user.role },
-          process.env.JWT_SECRET,
-          {
-            expiresIn: '1000d'
-          }
-        )
-        const { password, ...userCreds } = user._doc
-        res.status(200).json({ token, user: userCreds })
-      } else res.status(400).json({ message: 'Wrong username or password' })
-    } else res.status(400).json({ message: 'Wrong username or password' })
+    if (user && validated && user.role === 'user') {
+      const token = jwt.sign(
+        { _id: user._id, role: user.role },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: '1h'
+        }
+      )
+      res.cookie('token', token, { expiresIn: '1h' })
+      const { password, ...userCreds } = user._doc
+      res.status(200).json({ token, user: userCreds })
+    } else
+      return res.status(400).json({ message: 'Wrong username or password' })
   })
 }
 
-// exports.requireSignin = (req, res, next) => {
-//   const token = req.headers.authorization.split(' ')[1]
-//   const user = jwt.verify(token, process.env.JWT_SECRET)
-//   // console.log(token)
-//   req.user = user
-//   next()
-// }
+exports.signOut = async (req, res) => {
+  const cookie = res.clearCookie('token')
+  res.status(200).json({
+    message: 'You have signed out successfully'
+  })
+}

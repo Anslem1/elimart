@@ -1,4 +1,4 @@
-const { signUp, signIn } = require('../../../Controllers/Auth/User/Auth')
+const { signUp, signIn, signOut } = require('../../../Controllers/Auth/User/Auth')
 const {
   isRequestValidated,
   validateSignUpRequest,
@@ -10,5 +10,6 @@ const router = require('express').Router()
 router
   .post('/signup', validateSignUpRequest, isRequestValidated, signUp)
   .post('/signin', validateSignInRequest, isRequestValidated, signIn)
+  .post('/signout', signOut)
 
 module.exports = router

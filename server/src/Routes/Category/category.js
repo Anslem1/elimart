@@ -1,6 +1,8 @@
 const {
   createCategories,
-  getAllCategories
+  getAllCategories,
+  updateCategories,
+  deleteCategories
 } = require('../../Controllers/Category/Category')
 const {
   requireSignin,
@@ -31,6 +33,19 @@ router
     adminMiddleware,
     upload.single('categoryImage'),
     createCategories
+  )
+  .post(
+    '/update',
+    requireSignin,
+    adminMiddleware,
+    upload.array('categoryImage'),
+    updateCategories
+  )
+  .post(
+    '/delete',
+    requireSignin,
+    adminMiddleware,
+    deleteCategories
   )
   .get('/get', getAllCategories)
 

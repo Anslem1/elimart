@@ -41,7 +41,7 @@
 .navbar-container input {
      background-color: #cdd1d7;
      border: none;
-     width: 35vmax;
+     width: 28vmax;
      border-radius: 13px;
      padding-left: 36px;
      padding-right: 10px;
@@ -156,7 +156,8 @@
 }
 
 .link {
-     text-decoration: none;
+     text-decoration: none !important;
+     color: initial !important;
 }
 .mobile-navbar-container {
      display: none;
@@ -185,11 +186,11 @@
           font-family: Roboto;
           color: #7c8e09;
           font-weight: 400;
-          font-size: 15px;
+          font-size: 18px;
      }
      .mobile-navbar-container p {
           font-family: Roboto;
-          font-size: 16px;
+          font-size: 15px;
           display: flex;
           gap: 5px;
           align-items: center;
@@ -287,7 +288,7 @@
      .mobile-input-container:hover > input {
           width: 200px;
           padding-left: 10px;
-            padding-right: 10px;
+          padding-right: 10px;
      }
      .mobile-input-container:hover > .mobile-search-container {
           background-color: #7c8e09;
@@ -298,9 +299,9 @@
           background: none;
           outline: none;
           float: left;
-        
+
           border-radius: 13px;
-       background-color: #cdd1d7;
+          background-color: #cdd1d7;
           font-size: 16px;
           transition: 0.4s;
           line-height: 35px;
@@ -319,6 +320,9 @@
           align-items: center;
           transition: 0.4s;
           margin-top: 20px;
+     }
 
+     .fa-user {
+          font-size: 18px;
      }
 }

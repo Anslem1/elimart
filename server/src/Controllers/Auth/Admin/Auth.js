@@ -32,29 +32,31 @@ exports.signUp = async (req, res) => {
     })
   } catch (error) {
     res.status(500).json(error)
-  }
+  } 
 }
 
 exports.signIn = async (req, res) => {
-  User.findOne({ email: req.body.email }).exec(async (error, user) => {
-    if (error) res.status(400).json({ error: 'Something went wrong' })
-    if (user) {
+  try {
+    User.findOne({ email: req.body.email }).exec(async (error, user) => {
       const validated = await bcrypt.compare(req.body.password, user.password)
-
-      if (validated && user.role === 'admin') {
+      if (error) res.status(400).json({ error: 'Something went wrong' })
+      if (user && validated && user.role === 'admin') {
         const token = jwt.sign(
           { _id: user._id, role: user.role },
           process.env.JWT_SECRET,
           {
-            expiresIn: '1000d'
+            expiresIn: '1h'
           }
         )
         res.cookie('token', token, { expiresIn: '1h' })
         const { password, ...userCreds } = user._doc
         res.status(200).json({ token, user: userCreds })
-      } else res.status(400).json({ message: 'Wrong username or password' })
-    } else res.status(400).json({ message: 'Wrong username or password' })
-  })
+      } else
+        return res.status(400).json({ message: 'Wrong username or password' })
+    })
+  } catch (error) {
+    return res.status(500).json({ error })
+  }
 }
 
 exports.signOut = async (req, res) => {

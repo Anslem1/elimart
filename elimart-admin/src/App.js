@@ -11,7 +11,9 @@ import { useEffect } from 'react'
 import Orders from './Pages/Orders/Orders'
 import Products from './Pages/Products/Product'
 import Category from './Pages/Category/Category'
+import PageType from './Pages/Pagetype/PageType'
 // import { getInitialData } from './Redux/actions/initialdata/initialdataAction'
+
 
 function App () {
   const token = localStorage.getItem('token')
@@ -22,12 +24,10 @@ function App () {
     if (!auth.authenticated) {
       dispatch(isUserSignedin())
     }
-  }, [])
+    if (auth.authenticated) dispatch(getInitialData())
+  }, [auth.authenticated])
 
-  useEffect(() => {
-    // dispatch(getAllCategory())
-    dispatch(getInitialData())
-  }, [])
+  // useEffect(() => {}, [token])
 
   return (
     <>
@@ -37,6 +37,7 @@ function App () {
         <Route path='/products' element={token ? <Products /> : <Signin />} />
         <Route path='/orders' element={token ? <Orders /> : <Signin />} />
         <Route path='/category' element={token ? <Category /> : <Signin />} />
+        <Route path='/page-type' element={token ? <PageType /> : <Signin />} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
       </Routes>

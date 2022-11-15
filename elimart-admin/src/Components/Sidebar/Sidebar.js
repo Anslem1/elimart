@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import './SidebarNav.css'
 
 function SidebarNav () {
+
   return (
     <>
       <div className='sidebar-container'>
@@ -25,6 +26,11 @@ function SidebarNav () {
           <li className='li'>
             <Link className='link' to={'/category'}>
               Category
+            </Link>
+          </li>
+          <li className='li'>
+            <Link className='link' to={'/page-type'}>
+              Pages
             </Link>
           </li>
         </div>

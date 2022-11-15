@@ -26,6 +26,11 @@ function MobileSideBar () {
               <i className='fa-solid fa-cubes'></i>
             </Link>
           </li>
+          <li className='mobile-li'>
+            <Link className='link' to={'/page-type'}>
+              <i className='fa-regular fa-note-sticky'></i>
+            </Link>
+          </li>
         </div>
       </div>
     </>

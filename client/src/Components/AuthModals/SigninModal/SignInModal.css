@@ -1,0 +1,72 @@
+
+.signUp-btn-container{
+    display: flex;
+    justify-content: end;
+    margin-right: 20px;
+}
+
+.signUp-btn-container > button{
+     padding: 10px;
+     border-radius: 10px;
+     background-color: rgb(102, 181, 238);
+     color: white;
+     font-size: 15px;
+     outline: none;
+     border: none;
+     cursor: pointer;
+}
+
+
+
+
+.signin-container {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+
+     height: 100%;
+     gap: 20px;
+}
+.signin-container h1 {
+     font-family: Open sans;
+     margin-bottom: 30px;
+}
+.email-container,
+.password-container,
+.email-container p,
+.password-container p {
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+     font-family: Roboto;
+}
+.email-container input,
+.password-container input {
+     border: 1.6px solid grey;
+     width: 300px;
+     border-radius: 10px;
+     outline-color: rgb(117, 37, 191);
+     padding: 10px;
+     font-family: roboto;
+}
+
+.sign_in_btn {
+     padding: 10px;
+     border-radius: 10px;
+     background-color: rgb(130, 0, 252);
+     color: white;
+     font-size: 15px;
+     outline: none;
+     margin-top: 20px;
+     border: none;
+     cursor: pointer;
+}
+
+
+@media screen and (max-width: 765px) {
+    .signUp-btn-container{
+        margin-right: 0 ;
+        /* border: 1px solid; */
+    }
+}

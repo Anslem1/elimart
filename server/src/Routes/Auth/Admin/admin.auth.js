@@ -15,6 +15,6 @@ const router = require('express').Router()
 router
   .post('/signup', validateSignUpRequest, isRequestValidated, signUp)
   .post('/signin', validateSignInRequest, isRequestValidated, signIn)
-  .post('/signout', requireSignin, signOut)
+  .post('/signout', signOut)
 
 module.exports = router

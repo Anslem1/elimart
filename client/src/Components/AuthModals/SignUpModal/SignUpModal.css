@@ -1,0 +1,116 @@
+.signup-container {
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+}
+.sign-up-header {
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+}
+
+.signin {
+     background-color: rgb(130, 0, 252) !important;
+}
+
+.sign-up-header h1 {
+     width: 60%;
+     text-align: center;
+     font-family: Open sans;
+     font-weight: 500;
+     margin-bottom: 10px;
+     /* font-size:100px; */
+}
+
+.sign_in_btn {
+     padding: 10px;
+     border-radius: 10px;
+     background-color: rgb(130, 0, 252);
+     color: white;
+     font-size: 15px;
+     outline: none;
+     margin-top: 20px;
+     border: none;
+     cursor: pointer;
+}
+
+.fullname {
+     display: flex;
+     gap: 10px;
+     margin: 10px;
+}
+.fullname input {
+     padding: 10px;
+     border-radius: 10px;
+     border: 1.5px solid;
+     display: flex;
+     outline-color: rgb(102, 181, 238);
+}
+
+.firstname p {
+     font-family: Open sans;
+     color: black;
+}
+.firstname {
+     display: flex;
+     flex-direction: column;
+     gap: 6px;
+}
+
+.username-container {
+     display: flex;
+     flex-direction: column;
+     gap: 10px;
+}
+
+.firstname p {
+     font-family: Open sans;
+     color: black;
+}
+.testin {
+     display: flex;
+     flex-direction: column;
+     gap: 6px;
+}
+.username-container {
+     display: flex;
+     flex-direction: column;
+     gap: 1px;
+     margin: 10px;
+}
+.username-container input {
+     font-weight: Roboto;
+     border-radius: 10px;
+     padding: 10px;
+     border: 1.5px solid;
+     outline-color: rgb(102, 181, 238);
+}
+.username-container p {
+     font-family: Open sans;
+}
+
+.signup_btn {
+     background-color: rgb(102, 181, 238);
+     border-radius: 10px;
+     margin-top: 50px;
+     padding: 10px;
+     outline: none;
+     border: none;
+     cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+     .sign-up-header h1 {
+          font-size: 20px;
+     }
+
+     .fullname {
+          flex-direction: column;
+     }
+     .testin {
+          margin: 0;
+
+          width: 100%;
+     }
+}

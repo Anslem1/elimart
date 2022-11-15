@@ -41,6 +41,9 @@ function Product () {
   function afterOpenModal () {
     subtitle.style.color = '#f00'
   }
+  function closeModalWithoutSubmit () {
+    setIsOpen(false)
+  }
   function closeModal () {
     const form = new FormData()
     form.append('name', name)
@@ -64,10 +67,6 @@ function Product () {
     } else setIsOpen(false)
   }
 
-  function closeModalWithoutSubmit () {
-    setIsOpen(false)
-  }
-
   function handleProductPicture (e) {
     setProductPicture([...productPicture, e.target.files[0]])
   }
@@ -82,8 +81,6 @@ function Product () {
     }
     return options
   }
-
-
 
   return (
     <>
@@ -175,13 +172,25 @@ function Product () {
                   : null}
                 <input
                   type='file'
+                  multiple='multiple'
                   name='categoryImage'
                   onChange={handleProductPicture}
                 />
               </div>
-              <button onClick={closeModal} className='add-category-btn'>
-                Add
-              </button>
+              <div
+                style={{ display: 'flex', gap: '10px', alignItems: 'center' }}
+              >
+                <button onClick={closeModal} className='add-category-btn'>
+                  Add
+                </button>
+
+                <button
+                  onClick={closeModalWithoutSubmit}
+                  className='add-category-btn delete'
+                >
+                  Cancel
+                </button>
+              </div>
             </Modal>
             <Producttable />
           </div>

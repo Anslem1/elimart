@@ -35,7 +35,13 @@ function SignUpModal (props) {
     }
     dispatch(SignUpUser(user))
     onRequestClose()
-    openSignInModal()
+
+    setFirstName('')
+    setLastName('')
+    setEmail('')
+    setUsername('')
+    setPassword('')
+
   }
 
   return (

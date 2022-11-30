@@ -1,0 +1,21 @@
+.login-checkout {
+     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+     height: 100% !important;
+     padding: 15px;
+     border-radius: 20px;
+}
+
+.signup-checkout {
+     margin-right: 0 !important;
+}
+
+.previous-button-container {
+     display: flex;
+     width: 100%;
+     align-items: center;
+}
+.previous-button {
+     margin-top: 15px;
+     background-color: red;
+     color: white;
+}

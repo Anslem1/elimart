@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 import { numberWithCommas } from '../../Midlleware'
 import { addToCart, getProductDetailsById } from '../../Redux/actions'
 
-import { generatePublicURL } from '../../Redux/helpers/urlConfig'
+
 import './SingleProductDetails.css'
 
 function SingleProductDetails () {
@@ -57,23 +57,23 @@ function SingleProductDetails () {
   return (
     <div className='product-details-container'>
       <div className='product-image-container'>
-        {
-          <img
-            src={generatePublicURL(productDetails.productPictures[0].images)}
-            alt=''
-          />
-        }
-        {productDetails.productPictures.map(images => {
-          return (
-            <div className='other-images-container'>
+          {
+            <img
+              src={(productDetails.productPictures[0].images)}
+              alt=''
+            />
+          }
+        <div className='other-images-container'>
+          {productDetails.productPictures.map(images => {
+            return (
               <img
-                src={generatePublicURL(images.images)}
+                src={(images.images)}
                 alt=''
                 className='other-images'
               />
-            </div>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
 
       <div className='product-details-content'>
@@ -83,7 +83,7 @@ function SingleProductDetails () {
         </div>
         <div className='product-name'>
           <p className='product-price'>
-            ₦{numberWithCommas(productDetails.price)}
+            {numberWithCommas(productDetails.price)}
           </p>
         </div>
 

@@ -24,7 +24,7 @@ function Product () {
   const [price, setPrice] = useState('')
   const [description, setDescription] = useState('')
   const [quantity, setQuantity] = useState('')
-  const [productPicture, setProductPicture] = useState([])
+  let [productPicture, setProductPicture] = useState([])
   const [category, setCategory] = useState('')
   const categories = useSelector(state => state.category)
 
@@ -32,7 +32,6 @@ function Product () {
 
   const token = localStorage.getItem('token')
   const [open, setOpen] = useState(false)
-  const toggleModal = () => setOpen(isOpen => !isOpen)
   const [modalIsOpen, setIsOpen] = React.useState(false)
   let subtitle
   function openModal () {
@@ -51,6 +50,7 @@ function Product () {
     form.append('description', description)
     form.append('category', category)
     form.append('quantity', quantity)
+
     for (let picture of productPicture) {
       form.append('productPicture', picture)
     }
@@ -64,11 +64,20 @@ function Product () {
     ) {
       dispatch(addProduct(form))
       setIsOpen(false)
+      setName('')
+      setCategory('')
+      setDescription('')
+      setPrice('')
+      setProductPicture([])
+      setCategory('')
     } else setIsOpen(false)
   }
 
+  console.log({ productPicture })
+
+  console.log({ productPicture })
   function handleProductPicture (e) {
-    setProductPicture([...productPicture, e.target.files[0]])
+    setProductPicture([...e.target.files])
   }
 
   function categoryOptions (categoriesOptions, options = []) {
@@ -118,7 +127,7 @@ function Product () {
                 <div className='category-name-container'>
                   <label>Product price</label>
                   <input
-                    type='text'
+                    type='number'
                     placeholder='Product price'
                     value={price}
                     onChange={e => setPrice(e.target.value)}
@@ -136,7 +145,7 @@ function Product () {
                 <div className='category-name-container'>
                   <label>Product quantity</label>
                   <input
-                    type='text'
+                    type='number'
                     placeholder='Product quantity'
                     value={quantity}
                     onChange={e => setQuantity(e.target.value)}
@@ -165,15 +174,15 @@ function Product () {
                   </select>
                 </div>
 
-                {productPicture.length > 0
+                {/* {productPicture.length > 0
                   ? productPicture.map((picture, index) => {
                       return <div key={index}>{picture.name}</div>
                     })
-                  : null}
+                  : null} */}
                 <input
                   type='file'
-                  multiple='multiple'
                   name='categoryImage'
+                  multiple
                   onChange={handleProductPicture}
                 />
               </div>

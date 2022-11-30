@@ -103,10 +103,16 @@ exports.updateCategories = async (req, res) => {
 
 exports.deleteCategories = async (req, res) => {
   const { ids } = req.body.payload
+
   const deletedCategories = []
   for (let i = 0; i < ids.length; i++) {
-    const deleteCategory = await Category.findByIdAndDelete({ _id: ids[i]._id })
-    deletedCategories.push(deleteCategory)
+    let deleteCategory
+    try {
+      deleteCategory = await Category.findByIdAndDelete({ _id: ids[i]._id })
+      deletedCategories.push(deleteCategory)
+    } catch (error) {
+      res.status(500).json({ error })
+    }
   }
   if (deletedCategories.length == ids.length) {
     res.status(200).json({ message: 'Categories deleted' })

@@ -5,7 +5,7 @@ const addressSchema = new Schema(
   {
     name: { type: String, required: true, trim: true, min: 3, max: 50 },
     mobileNumber: { type: String, required: true, trim: true },
-    pinCode: { type: String, required: true },
+    zipCode: { type: String, required: true },
     locality: { type: String, required: true },
     address: { type: String, required: true },
     city: {
@@ -24,16 +24,15 @@ const addressSchema = new Schema(
       required: true,
       enum: ['home', 'work']
     }
-  },
-  { timestamps: true }
+  }
 )
 
 const userAddressSchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
-      required: true,
-      ref: 'User'
+      ref: 'User',
+      required: true
     },
     address: [addressSchema]
   },

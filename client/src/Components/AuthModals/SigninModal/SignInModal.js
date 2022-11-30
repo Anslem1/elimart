@@ -12,8 +12,6 @@ function SignInModal (props) {
 
   const auth = useSelector(state => state.auth)
 
-  
-
   const {
     isOpen,
     onAfterOpen,
@@ -24,7 +22,6 @@ function SignInModal (props) {
   } = props
 
   function userSignIn (e) {
-    e.preventDefault()
     e.preventDefault()
     const user = {
       email,
@@ -42,36 +39,38 @@ function SignInModal (props) {
       style={style}
       ariaHideApp={ariaHideApp}
     >
-      <div className='signUp-btn-container'>
-        <button className='signup' onClick={openModal}>
-          Sign up
-        </button>
-      </div>
+      <div className='signin-content'>
+        <div className='signUp-btn-container'>
+          <button className='signup' onClick={openModal}>
+            Sign up
+          </button>
+        </div>
 
-      <form action='' className='signin-container' onSubmit={userSignIn}>
-        <div className='email-container'>
-          <h1>Welcome back</h1>
-          <p>Email</p>
-          <input
-            type='text'
-            placeholder='E.g yagami@gmail.com'
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className='password-container'>
-          <p>Password</p>
-          <input
-            type='password'
-            placeholder='Password'
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-          />
-          <button className='sign_in_btn'>Sign in</button>
-        </div>
-      </form>
+        <form action='' className='signin-container' onSubmit={userSignIn}>
+          <div className='email-container'>
+            <h1>Welcome back</h1>
+            <p>Email</p>
+            <input
+              type='text'
+              placeholder='E.g yagami@gmail.com'
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className='password-container'>
+            <p>Password</p>
+            <input
+              type='password'
+              placeholder='Password'
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+            />
+            <button className='sign_in_btn'>Sign in</button>
+          </div>
+        </form>
+      </div>
     </Modal>
   )
 }

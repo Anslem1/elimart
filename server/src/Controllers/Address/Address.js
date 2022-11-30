@@ -4,25 +4,41 @@ exports.addAddress = (req, res) => {
   const { payload } = req.body
 
   console.log(payload)
+
   if (payload.address) {
-    console.log(payload)
-    // return res.status(200).json({ body: req.body })
-    UserAddress.findOneAndUpdate(
-      { user: req.user._id },
-      {
-        $push: {
-          address: payload.address
+    if (payload.address._id) {
+      UserAddress.findOneAndUpdate(
+        { user: req.user._id, 'address._id': payload.address._id },
+        {
+          $set: {
+            'address.$': payload.address
+          }
         }
-      },
-      { new: true, upsert: true }
-    ).exec((error, address) => {
-      if (error) res.status(400).json({ error })
-      if (address) {
-        res.status(200).json({ address })
-      }
-    })
+      ).exec((error, address) => {
+        if (error) res.status(400).json({ error })
+
+        if (address) {
+          res.status(200).json({ address })
+        }
+      })
+    } else {
+      UserAddress.findOneAndUpdate(
+        { user: req.user._id },
+        {
+          $push: {
+            address: payload.address
+          }
+        },
+        { new: true, upsert: true }
+      ).exec((error, address) => {
+        if (error) return res.status(400).json({ error })
+        if (address) {
+          res.status(200).json({ address })
+        }
+      })
+    }
   } else {
-    return res.status(400).json({ error: 'Adress parameter required' })
+    res.status(400).json({ error: 'Params address required' })
   }
 }
 

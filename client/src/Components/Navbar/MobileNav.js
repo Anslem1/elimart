@@ -21,12 +21,30 @@ const customStyles = {
     zIndex: '1'
   }
 }
+const signUpCustomStyles = {
+  content: {
+    top: '55%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    width: '85%',
+    diplay: 'block',
+    overflow: 'auto',
+    padding: '10px',
+    transform: 'translate(-50%, -50%)',
+    zIndex: '1',
+    height: '70vh'
+  }
+}
 
 function MobileNav () {
   const [showCategory, setShowCategory] = useState(false)
 
   const category = useSelector(state => state.category)
   const dispatch = useDispatch()
+
+  const cart = useSelector(state => state.cart)
 
   const [signInModal, setSignInModal] = useState(false)
   const [signUpModal, setSignUpModal] = useState(false)
@@ -70,11 +88,12 @@ function MobileNav () {
       allCategories.push(
         <li key={category.name}>
           {category.parentId ? (
-            <a
-              href={`/${category.slug}?cid=${category._id}&pagetype=${category.pagetype}`}
+            <Link
+              to={`/${category.slug}?cid=${category._id}&pagetype=${category.pagetype}`}
+              onClick={() => setShowCategory(show => !show)}
             >
               {category.name}
-            </a>
+            </Link>
           ) : (
             <span>{category.name}</span>
           )}
@@ -123,7 +142,7 @@ function MobileNav () {
         isOpen={signUpModal}
         onAfterOpen={afterOpenSignUpModal}
         onRequestClose={closeSignUpModal}
-        style={customStyles}
+        style={signUpCustomStyles}
         openSignInModal={openSignInModal}
         ariaHideApp={false}
       />
@@ -152,10 +171,24 @@ function MobileNav () {
             {categoryHeader()}
           </div>
           <Link to='/cart' className='link'>
-            <p>
+            <p className='cart-count'>
               <i className='fa-solid fa-cart-arrow-down'></i>
+              {
+                <>
+                  {Object.keys(cart.cartItems).length > 0 && (
+                    <span>{Object.keys(cart.cartItems).length}</span>
+                  )}
+                </>
+              }
             </p>
           </Link>
+          {auth.token && (
+            <Link to={'/profile'} className='link'>
+              <p>
+                <i className='fa-solid fa-user'></i>
+              </p>
+            </Link>
+          )}
           {auth.token ? (
             <p onClick={signOut}>
               Signout
@@ -166,13 +199,6 @@ function MobileNav () {
               Login
               <i className='fa-solid fa-arrow-right-to-bracket'></i>
             </p>
-          )}
-          {auth.token && (
-            <Link to={'/profile'} className='link'>
-              <p>
-                <i className='fa-solid fa-user'></i>
-              </p>
-            </Link>
           )}
         </div>
         <div className='mobile-input-container'>

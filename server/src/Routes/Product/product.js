@@ -1,7 +1,9 @@
 const {
   createProduct,
   getProductsBySlug,
-  getProductDetailsById
+  getProductDetailsById,
+  deleteProductById,
+  getProducts
 } = require('../../Controllers/Products/Products')
 
 const {
@@ -17,10 +19,12 @@ router
     '/product/create',
     requireSignin,
     adminMiddleware,
-    upload.array('productPicture'),
+    upload.array('productPicture', 4),
     createProduct
   )
   .get('/products/:slug', getProductsBySlug)
   .get('/product/:productId', getProductDetailsById)
+  .delete('/product/delete', requireSignin, adminMiddleware, deleteProductById)
+  .post('/product/get', requireSignin, adminMiddleware, getProducts)
 
 module.exports = router

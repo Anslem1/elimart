@@ -1,0 +1,56 @@
+.order-container {
+     position: absolute;
+     top: 80px;
+     margin: 20px;
+     left: 0;
+     right: 0;
+}
+
+
+.order-content {
+     display: flex;
+     border: 1px solid #cecece;
+     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+          rgba(255, 244, 244, 0.08) 0px 0px 0px 1px;
+     justify-content: space-between;
+     margin: 10px;
+     margin-bottom: 20px;
+     padding: 20px;
+
+}
+
+.order-image-container {
+     display: flex;
+}
+.order-image-container > img {
+     width: 70px;
+     height: 70px;
+     object-fit: contain;
+}
+
+.order-name-qunatity,
+.payment-status-price {
+     display: flex;
+     flex-direction: column;
+     gap: 5px;
+}
+.order-name-qunatity p:nth-last-of-type(2){
+    color: initial;
+}
+.payment-status-price p:nth-last-of-type(2){
+    color: initial;
+}
+.order-name-qunatity p,
+.payment-status-price p {
+     inline-size: 80%;
+     font-family: Roboto;
+     color: rgb(123, 110, 110);
+     font-weight: 500;
+}
+.payment-status-price > p:nth-of-type(2) {
+     white-space: nowrap;
+}
+
+
+
+

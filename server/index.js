@@ -1,5 +1,5 @@
+require('dotenv').config()
 const express = require('express')
-const env = require('dotenv')
 const mongoose = require('mongoose')
 const path = require('path')
 const cors = require('cors')
@@ -11,22 +11,20 @@ const productRoutes = require('./src/Routes/Product/product')
 const cartRoutes = require('./src/Routes/Cart/cart')
 const pageTypeRoute = require('./src/Routes/Admin/Pagetype/Pagetype')
 const initialDataRoutes = require('./src/Routes/Admin/initialdata')
+const adminOrderRoute = require('./src/Routes/Admin/Order/AdminOrders')
 const addressRoutes = require('./src/Routes/Address/address')
+const orderRoutes = require('./src/Routes/Order/order')
 
 const app = express()
-
-env.config()
-
-app.use(express.json())
-app.use('/public', express.static(path.join(__dirname, './src/uploads/')))
 
 mongoose
   .connect(process.env.MONGO_URL)
   .then(console.log('Mongo working?'))
-  .catch(err => console.log(err))
+  .catch(err => console.log({ err }))
 
-app.use(cors())
 app
+  .use(cors())
+  .use(express.json())
   .use('/api/auth/admin', adminRoutes)
   .use('/api/auth', userRoutes)
   .use('/api/categories', categoryRoutes)
@@ -35,6 +33,8 @@ app
   .use('/api/pagetype', pageTypeRoute)
   .use('/api', initialDataRoutes)
   .use('/api/user/address', addressRoutes)
+  .use('/api/user/orders', orderRoutes)
+  .use('/api/admin/orders', adminOrderRoute)
 
 app.listen(process.env.PORT, () => {
   console.log(`server running on port ${process.env.PORT}`)

@@ -3,12 +3,13 @@ import { productConstants } from '../../actions/constants/constants'
 const initialState = {
   products: [],
   productsByPrice: {
-    under30k: [],
-    under60k: [],
-    under80k: [],
-    under100k: [],
-    under120k: []
+    // under30k: [],
+    // under60k: [],
+    // under80k: [],
+    // under100k: [],
+    // under120k: []
   },
+  priceRange: {},
   PageRequest: false,
   Page: {},
   productDetails: {},
@@ -21,6 +22,7 @@ export default (state = initialState, action) => {
       state = {
         ...state,
         products: action.payload.products,
+        priceRange: action.payload.priceRange,
         productsByPrice: {
           ...action.payload.productsByPrice
         }
@@ -46,9 +48,7 @@ export default (state = initialState, action) => {
         PageRequest: false
       }
       break
-    
-    
-    
+
     case productConstants.GET_PRODUCT_DETAILS_BY_ID_REQUEST:
       state = {
         ...state,

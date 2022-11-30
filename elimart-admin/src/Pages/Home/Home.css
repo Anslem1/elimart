@@ -1,12 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
-
-/* .home-header-text {
-     text-align: center;
-     font-family: Open sans;
-     font-weight: 500;
-     top: 20px;
-     position: relative;
-} */
+.home-header-text {
+/* inline-size: 100%; */
+}
+/*  */
 
 /* .home-container {
      display: flex;

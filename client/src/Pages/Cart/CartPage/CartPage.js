@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
 import { numberWithCommas } from '../../../Midlleware'
-import { generatePublicURL } from '../../../Redux/helpers/urlConfig'
+import { removeCartItem } from '../../../Redux/actions'
+
 import '../Cart.css'
+import { useDispatch } from 'react-redux'
 
 function CartPage (props) {
   const { cartImage, name, price, key, _id } = props.cartItems
   const [quantity, setQuantity] = useState(props.cartItems.quantity)
+  const dispatch = useDispatch()
 
   function incrementQuantity () {
     setQuantity(quantity + 1)
@@ -19,9 +22,9 @@ function CartPage (props) {
 
   return (
     <div className='cart-content-container'>
-      <div className='cart-content' key={key}>
+      <div className='cart-content' key={_id}>
         <div className='cart-image-container'>
-          <img src={generatePublicURL(cartImage)} alt='' />
+          <img src={cartImage} alt='' />
           <div className='increase-cart-amount'>
             <button onClick={decrementQuantity}> − </button>
             <span>
@@ -32,16 +35,13 @@ function CartPage (props) {
         </div>
         <div className='cart-name-price'>
           <p> {name}</p>
-          <p>₦ {numberWithCommas(price)}</p>
+          <p>{numberWithCommas(price)}</p>
         </div>
       </div>
       <div className='remove-save-later'>
         <div className='remove-save-later'>
-          <p>
+          <p onClick={() => props.onRemoveCartItem(_id)}>
             Remove item <i className='fa-solid fa-trash'></i>
-          </p>
-          <p>
-            Save for later <i className='fa-solid fa-heart'></i>
           </p>
         </div>
         <div className='arrives-container'>

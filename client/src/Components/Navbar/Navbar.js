@@ -29,6 +29,7 @@ function Navbar () {
   const [signUpModal, setSignUpModal] = useState(false)
 
   const auth = useSelector(state => state.auth)
+  const cart = useSelector(state => state.cart)
 
   let subtitle
 
@@ -74,11 +75,12 @@ function Navbar () {
       allCategories.push(
         <li key={category.name}>
           {category.parentId ? (
-            <a
+            <Link
               href={`/${category.slug}?cid=${category._id}&pagetype=${category.pagetype}`}
+              onClick={() => setShowCategory(false)}
             >
               {category.name}
-            </a>
+            </Link>
           ) : (
             <span>{category.name}</span>
           )}
@@ -158,11 +160,21 @@ function Navbar () {
           </div>
         </div>
         <Link to='/cart' className='link'>
-          <p>
+          <p className='cart-count'>
             <i className='fa-solid fa-cart-arrow-down'></i>
             Cart
+            {Object.keys(cart.cartItems).length > 0 && (
+              <span>{Object.keys(cart.cartItems).length}</span>
+            )}
           </p>
         </Link>
+        {auth.token && (
+          <Link to={'/profile'}>
+            <p>
+              <i className='fa-solid fa-user'></i>
+            </p>
+          </Link>
+        )}
         {auth.token ? (
           <p onClick={signOut}>
             {' '}
@@ -175,13 +187,6 @@ function Navbar () {
             Login
             <i className='fa-solid fa-arrow-right-to-bracket'></i>
           </p>
-        )}
-        {auth.token && (
-          <Link to={'/profile'}>
-            <p>
-              <i className='fa-solid fa-user'></i>
-            </p>
-          </Link>
         )}
       </nav>
       {signUpModalFunc()}

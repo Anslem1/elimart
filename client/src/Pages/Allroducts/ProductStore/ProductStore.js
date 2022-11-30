@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductBySlug } from '../../../Redux/actions'
 import { useLocation } from 'react-router-dom'
-import { generatePublicURL } from '../../../Redux/helpers/urlConfig'
 import { Link } from 'react-router-dom'
 
 import './ProductStore.css'
-import { numberWithCommas } from '../../../Midlleware';
+import { numberWithCommas } from '../../../Midlleware'
 function ProductStore () {
+  // const [showProduct, swtShowProduct] = useState(false)
+
   const dispatch = useDispatch()
   const location = useLocation()
   const path = location.pathname.split('/')[1]
@@ -20,7 +21,7 @@ function ProductStore () {
   })
 
   const product = useSelector(state => state.products)
-
+  const priceRange = product.priceRange
 
   useEffect(() => {
     dispatch(getProductBySlug(path))
@@ -33,7 +34,7 @@ function ProductStore () {
           <>
             <div className='card'>
               <p>
-                {path} devices under ₦{numberWithCommas(priceUnder[key])}
+                {path} under {numberWithCommas(priceRange[key])}
               </p>
               <button>View</button>{' '}
             </div>
@@ -48,16 +49,11 @@ function ProductStore () {
                   >
                     <div>
                       <div className='product-img-container'>
-                        <img
-                          src={generatePublicURL(
-                            product.productPictures[0].images
-                          )}
-                          alt=''
-                        />
+                        <img src={product.productPictures[0].images} alt='' />
                       </div>
                       <div className='product-header'>
                         <p>{product.name}</p>
-                        <p>₦{numberWithCommas(product.price)}</p>
+                        <p>{numberWithCommas(product.price)}</p>
                       </div>
                       <div className='rating'>
                         <span>4.3</span>

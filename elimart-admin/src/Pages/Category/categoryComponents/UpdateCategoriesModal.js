@@ -175,7 +175,7 @@ function UpdateCategoryModal (props) {
                         )
                       }
                     >
-                      <option>--Select type --</option>
+                      <option >--Select type --</option>
                       <option>Page</option>
                       <option>Store</option>
                       <option>Product</option>

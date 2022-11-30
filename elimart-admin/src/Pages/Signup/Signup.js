@@ -6,6 +6,7 @@ import './Signup.css'
 
 function Signup () {
   const user = useSelector(state => state.user)
+  const auth = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
   const [firstName, setFirstName] = useState('')
@@ -15,7 +16,7 @@ function Signup () {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
-  async function userSignin (e) {
+  async function userSignUp (e) {
     e.preventDefault()
     const user = {
       firstName,
@@ -25,17 +26,17 @@ function Signup () {
       password
     }
     dispatch(SignUpUser(user))
+    if (auth.authenticated === true) {
+      return <Navigate to='/' replace />
+    }
   }
-
 
   return (
     <>
       <div className='sign-up-header'>
-        <h1>
-          Welcome to Elimart. Shop more, pay less.
-        </h1>
+        <h1>Welcome to Elimart Admin. Take control!</h1>
       </div>
-      <form className='signup-container' action='' onSubmit={userSignin}>
+      <form className='signup-container' action='' onSubmit={userSignUp}>
         <div className='testin'>
           <div className='fullname'>
             <div className='firstname'>
@@ -46,6 +47,7 @@ function Signup () {
                 value={firstName}
                 onChange={e => setFirstName(e.target.value)}
                 required
+                maxLength='12'
               />
             </div>
 
@@ -55,6 +57,7 @@ function Signup () {
                 type='text'
                 placeholder='e.g Light'
                 value={lastName}
+                maxLength='12'
                 onChange={e => setLastName(e.target.value)}
                 required
               />
@@ -65,7 +68,7 @@ function Signup () {
             <div className='username-container'>
               <p>Email</p>
               <input
-                type='text'
+                type='email'
                 placeholder='yagami@example.com'
                 value={email}
                 onChange={e => setEmail(e.target.value)}
@@ -77,6 +80,7 @@ function Signup () {
               <input
                 type='text'
                 placeholder='Ryuk'
+                maxLength='12'
                 value={username}
                 onChange={e => setUsername(e.target.value)}
                 required

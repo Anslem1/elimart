@@ -6,10 +6,13 @@ exports.signUp = async (req, res) => {
   try {
     const salt = await bcrypt.genSalt(12)
     const hashedPassword = await bcrypt.hash(req.body.password, salt)
-    User.findOne({ email: req.body.email }).exec((error, user) => {
-      if (user) res.status(400).json({ message: 'Email already exists' })
-      else if (error)
-        res.status(500).json({ message: 'Something went wrong, try again' })
+    User.findOne({ email: req.body.email }).exec(async (error, user) => {
+      const username = await User.findOne({
+        username: req.body.username
+      })
+      if (user || username)
+        res.status(400).json({ message: 'Email or username already exists' })
+      if (error) res.status(400).json({ error })
       else {
         const { firstName, lastName, email } = req.body
         const newUser = new User({
@@ -23,21 +26,35 @@ exports.signUp = async (req, res) => {
             : Math.random().toString(),
           role: 'admin'
         })
-        newUser.save((error, data) => {
-          if (error) res.status(500).json({ message: 'Something went wrong' })
-          else if (data)
-            res.status(200).json({ message: 'Admin has been created' })
+        newUser.save((error, user) => {
+          if (error) res.status(500).json({ error })
+
+          if (user) {
+            const token = jwt.sign(
+              { _id: user._id, role: user.role },
+              process.env.JWT_SECRET,
+              {
+                expiresIn: '1h'
+              }
+            )
+            const { password, ...userCreds } = user._doc
+            res.status(200).json({
+              token,
+              user: userCreds,
+              message: 'User successfully create '
+            })
+          }
         })
       }
     })
   } catch (error) {
     res.status(500).json(error)
-  } 
+  }
 }
 
 exports.signIn = async (req, res) => {
-  try {
-    User.findOne({ email: req.body.email }).exec(async (error, user) => {
+  User.findOne({ email: req.body.email }).exec(async (error, user) => {
+    try {
       const validated = await bcrypt.compare(req.body.password, user.password)
       if (error) res.status(400).json({ error: 'Something went wrong' })
       if (user && validated && user.role === 'admin') {
@@ -53,10 +70,10 @@ exports.signIn = async (req, res) => {
         res.status(200).json({ token, user: userCreds })
       } else
         return res.status(400).json({ message: 'Wrong username or password' })
-    })
-  } catch (error) {
-    return res.status(500).json({ error })
-  }
+    } catch (error) {
+      return res.status(500).json({ error })
+    }
+  })
 }
 
 exports.signOut = async (req, res) => {

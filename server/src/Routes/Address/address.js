@@ -7,7 +7,7 @@ const {
 const router = require('express').Router()
 
 router
+  .get('/get', requireSignin, userMiddleware, getAddress)
   .post('/create', requireSignin, userMiddleware, addAddress)
-  .post('/get', requireSignin, userMiddleware, getAddress)
 
 module.exports = router

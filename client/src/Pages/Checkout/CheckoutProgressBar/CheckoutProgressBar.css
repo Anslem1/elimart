@@ -1,0 +1,37 @@
+.progress-bar-container {
+     width: 100%;
+     margin: 20px;
+     margin-right: 50px;
+     margin-left: 50px;
+     /* position: absolute; */
+}
+
+.bar > span {
+     position: absolute;
+
+     top: 25px;
+     width: 50px;
+     font-family: Open sans;
+     font-size: 13px;
+     /* inline-size: 10px; */
+}
+
+.progress-bar-content {
+     display: flex;
+     justify-content: center;
+}
+.step {
+     background-color: white;
+     width: 20px;
+     height: 20px;
+     background-color: indigo;
+     border-radius: 50%;
+     display: flex;
+     justify-content: center;
+     border: 1px solid;
+     align-items: center;
+}
+
+.completed {
+     background-color: rgb(124, 142, 9);
+}

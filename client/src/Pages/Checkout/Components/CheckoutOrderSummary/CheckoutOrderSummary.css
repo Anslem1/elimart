@@ -1,0 +1,14 @@
+.price-components{
+    margin-top: 0;
+}
+
+.order-summary-btn{
+    margin-bottom: 20px;
+}
+
+.confirmation{
+    border: 1px solid #cecece;
+    padding: 10px;
+    line-height: 25px;
+    font-family: 400;
+}

@@ -34,6 +34,11 @@
      margin-top: 10px;
 }
 
+.t-body  td{
+border: 1px solid #cecece;
+white-space: wrap;
+}
+
 .img-container label {
      font-size: 18px;
 }

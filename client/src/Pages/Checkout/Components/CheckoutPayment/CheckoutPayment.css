@@ -1,0 +1,11 @@
+.payment-container {
+     display: flex;
+
+     flex-direction: column;
+     gap: 30px;
+}
+
+.payment-type-container {
+     display: flex;
+     gap: 10px;
+}

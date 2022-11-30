@@ -1,6 +1,7 @@
 import axios from 'axios'
-import store from '../store';
 import { API } from './urlConfig'
+import store from '../store'
+import { authConstants } from '../actions/constants/constants'
 
 const token = localStorage.getItem('token')
 const axioInstance = axios.create({
@@ -15,5 +16,19 @@ axioInstance.interceptors.request.use(req => {
   }
   return req
 })
+axioInstance.interceptors.response.use(
+  res => {
+    return res
+  },
+  error => {
+    console.log(error)
+    const { status } = error.response
+    if (status === 500 || status === 400) {
+      // localStorage.clear()
+      // store.dispatch({ type: authConstants.LOGOUT_SUCCESS })
+    }
+    return Promise.reject(error)
+  }
+)
 
 export default axioInstance

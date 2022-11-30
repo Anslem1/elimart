@@ -1,11 +1,12 @@
 
-.signUp-btn-container{
-    display: flex;
-    justify-content: end;
-    margin-right: 20px;
+
+.signUp-btn-container {
+     display: flex;
+     justify-content: end;
+     margin-right: 20px;
 }
 
-.signUp-btn-container > button{
+.signUp-btn-container > button {
      padding: 10px;
      border-radius: 10px;
      background-color: rgb(102, 181, 238);
@@ -17,14 +18,11 @@
 }
 
 
-
-
 .signin-container {
      display: flex;
      flex-direction: column;
      justify-content: center;
      align-items: center;
-
      height: 100%;
      gap: 20px;
 }
@@ -44,7 +42,7 @@
 .email-container input,
 .password-container input {
      border: 1.6px solid grey;
-     width: 300px;
+     width: 250px;
      border-radius: 10px;
      outline-color: rgb(117, 37, 191);
      padding: 10px;
@@ -63,10 +61,9 @@
      cursor: pointer;
 }
 
-
 @media screen and (max-width: 765px) {
-    .signUp-btn-container{
-        margin-right: 0 ;
-        /* border: 1px solid; */
-    }
+     .signUp-btn-container {
+          margin-right: 0;
+          /* border: 1px solid; */
+     }
 }

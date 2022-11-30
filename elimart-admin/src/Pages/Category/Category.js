@@ -4,7 +4,7 @@ import MobileSideBar from '../../Components/Sidebar/MobileSideBar'
 import SidebarNav from '../../Components/Sidebar/Sidebar'
 import {
   addCategory,
-  deleeCategories,
+  deleteCategories,
   getAllCategory,
   updateCategories
 } from '../../Redux/actions'
@@ -238,7 +238,7 @@ function Category () {
     const idsArray = expandedIdsArray.concat(checkedIdsArray)
 
     if (checkedIdsArray.length > 0) {
-      dispatch(deleeCategories(checkedIdsArray))
+      dispatch(deleteCategories(checkedIdsArray))
       dispatch(getAllCategory())
       setDeleteCategoryModal(false)
 

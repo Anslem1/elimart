@@ -14,6 +14,9 @@ import Category from './Pages/Category/Category'
 import PageType from './Pages/Pagetype/PageType'
 // import { getInitialData } from './Redux/actions/initialdata/initialdataAction'
 
+export function numberWithCommas (x) {
+  return x && `₦${' '}${x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+}
 
 function App () {
   const token = localStorage.getItem('token')
@@ -27,8 +30,6 @@ function App () {
     if (auth.authenticated) dispatch(getInitialData())
   }, [auth.authenticated])
 
-  // useEffect(() => {}, [token])
-
   return (
     <>
       <Body />
@@ -38,8 +39,9 @@ function App () {
         <Route path='/orders' element={token ? <Orders /> : <Signin />} />
         <Route path='/category' element={token ? <Category /> : <Signin />} />
         <Route path='/page-type' element={token ? <PageType /> : <Signin />} />
-        <Route path='/signin' element={<Signin />} />
-        <Route path='/signup' element={<Signup />} />
+        <Route path='/signin' element={token ? <Home /> : <Signin />} />
+        <Route path='/signup' element={token ? <Home /> : <Signup />} />
+   
       </Routes>
     </>
   )

@@ -1,0 +1,246 @@
+.address-container {
+     display: grid;
+     gap: 10px;
+     border: 1px solid #cecece;
+     border-radius: 5px;
+     padding: 20px;
+     margin-bottom: 15px;
+     z-index: 0;
+}
+.address-name-number {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 15px;
+     margin: 15px;
+}
+
+.add-address-btn-container {
+     padding: 10px;
+}
+.add-address-btn-container > button {
+     border-radius: 10px;
+     border: none;
+     background-color: rgb(75, 0, 130);
+     color: white;
+     font-family: Roboto;
+     padding: 10px;
+}
+.add-address-btn-container > button > p {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 10px;
+}
+
+.address-name {
+     display: flex;
+     flex-direction: column;
+     /* position: absolute; */
+}
+
+.address-container > p {
+     /* display: grid; */
+     gap: 10px;
+     border-bottom: 1px solid #cecece;
+     text-align: end;
+     font-size: 20px;
+     margin-bottom: 5px;
+     font-family: Roboto;
+}
+
+.previous-delever {
+     display: flex;
+     gap: 10px;
+     align-items: center;
+     /* width: 0%; */
+
+     margin-top: 15px;
+}
+
+.previous-next {
+     display: flex;
+     /* gap: 20px; */
+     align-items: center;
+}
+.previous-next > button:nth-of-type(1) {
+     border-radius: 10px;
+     border: none;
+     background-color: rgb(124, 142, 9);
+     color: white;
+     font-family: Roboto;
+     padding: 10px;
+     white-space: nowrap;
+
+     margin-right: 10px;
+}
+.previous-next > button:nth-of-type(2) {
+     border-radius: 10px;
+     border: none;
+     background-color: red;
+     color: white;
+     font-family: Roboto;
+     padding: 10px;
+}
+
+.edit-delivary-btn {
+     border-radius: 10px;
+     border: none;
+     background-color: rgb(75, 0, 130) !important;
+     color: white;
+     font-family: Roboto;
+     /* padding: 10px; */
+     border-radius: 10px;
+     border: none;
+     background-color: rgb(75, 0, 130);
+     color: white;
+     font-family: Roboto;
+     padding: 10px;
+}
+.delivery-name-container {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 20px;
+}
+
+.delivery-name-container > button {
+     border-radius: 10px;
+     border: none;
+     background-color: rgb(124, 142, 9);
+     color: white;
+     margin-top: 15px;
+     font-family: Roboto;
+     padding: 10px;
+}
+
+.address-container > h2 {
+     font-family: Roboto;
+     font-weight: 500;
+     margin-bottom: 20px;
+}
+
+.previous-login {
+     position: relative;
+}
+
+.save-deliver {
+     margin-bottom: 20px;
+}
+
+.address-info {
+     display: flex;
+}
+.delivery-name-container p {
+     font-family: Open sans;
+     font-size: 15px;
+}
+
+.shipping-address-container {
+     display: flex;
+     flex-direction: column;
+     gap: 5px;
+}
+
+.shipping-address-container > span {
+     font-family: Roboto;
+     font-size: 15px;
+     display: flex;
+     gap: 5px;
+}
+
+.shipping-address-container > p {
+     inline-size: 200px;
+     line-height: 20px;
+}
+
+.address-name > label {
+     color: #837d7d;
+     font-size: 15px;
+     font-family: Roboto;
+     margin-bottom: 5px;
+}
+
+.address-name > input {
+     width: 250px;
+     border: 1px solid #cecece;
+     border-radius: 9px;
+     padding: 10px;
+     outline-color: rgb(124, 142, 9);
+     /* margin-bottom: 10px; */
+}
+.address-address {
+     display: flex;
+     flex-direction: column;
+     grid-template-columns: max-content;
+}
+
+.address-address > label {
+     color: #837d7d;
+     font-size: 15px;
+     font-family: Roboto;
+}
+
+.address-address > input {
+     border: 1px solid #cecece;
+     border-radius: 9px;
+     padding: 10px;
+
+     outline-color: rgb(124, 142, 9);
+}
+.address-name > select {
+     width: 48%;
+     border: 1px solid #cecece;
+     padding: 5px 10px 10px 5px;
+     border-radius: 10px;
+     outline-color: rgb(124, 142, 9);
+}
+
+.select-delivery-name-container {
+     padding: 15px;
+}
+
+.cancel_btn {
+     background-color: red !important;
+}
+
+@media screen and (max-width: 550px) {
+     .address-container {
+          position: relative;
+          /* padding: 0; */
+     }
+     .address-name-number {
+          display: grid;
+          grid-template-columns: 1fr;
+          /* gap: 10px; */
+     }
+     .address-name > input {
+          width: 70vw;
+          padding: 10px;
+     }
+     .delivery-name-container {
+          gap: 20px;
+
+          width: 100%;
+     }
+     .address-container {
+          width: 80%;
+     }
+
+     .shipping-address-container > span {
+          white-space: nowrap;
+          width: 100%;
+
+          inline-size: 100%;
+     }
+
+     .shipping-address-container > p {
+          inline-size: 100%;
+          /* position: absolute; */
+          bottom: 0;
+     }
+
+     .previous-next > button:nth-of-type(1) {
+          border-radius: 10px;
+     }
+     .previous-next > button:nth-of-type(2) {
+     }
+}

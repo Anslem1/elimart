@@ -22,10 +22,9 @@ function ProductPage () {
     const payload = {
       params
     }
-
     dispatch(getProductPageType(payload))
   }, [])
-  // console.log(product)
+  
   return (
     <>
       <h1 className='page-title'>{Page.title}</h1>

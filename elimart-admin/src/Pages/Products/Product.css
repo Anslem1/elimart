@@ -53,10 +53,10 @@
     
 }
 
-/* .table-name{
-     inline-size: 100px;
+.table-name{
+     inline-size: 40%;
 
-} */
+}
 
 .container {
      --bs-gutter-x: 1.5rem;

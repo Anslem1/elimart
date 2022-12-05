@@ -5,7 +5,7 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-  console.log(action)
+
   switch (action.type) {
     case productConstants.GET_ALL_PRODUCTS_SUCCESS:
       state = {
@@ -14,6 +14,6 @@ export default (state = initialState, action) => {
       }
       break
   }
-  // console.log(action.payload.produc
+
   return state
 }

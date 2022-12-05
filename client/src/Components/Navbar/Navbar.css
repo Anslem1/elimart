@@ -222,7 +222,7 @@
           text-decoration: underline !important;
      }
      .mobile-sidebar-container > ul > li > ul > li {
-          text-align: end;
+          text-align: start;
      }
      .mobile-sidebar-container li {
           list-style-type: none;

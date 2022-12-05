@@ -18,7 +18,10 @@ const orderRoutes = require('./src/Routes/Order/order')
 const app = express()
 
 mongoose
-  .connect(process.env.MONGO_URL)
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
   .then(console.log('Mongo working?'))
   .catch(err => console.log({ err }))
 
@@ -37,5 +40,5 @@ app
   .use('/api/admin/orders', adminOrderRoute)
 
 app.listen(process.env.PORT, () => {
-  console.log(`server running on port ${process.env.PORT}`) 
+  console.log(`server running on port ${process.env.PORT}`)
 })

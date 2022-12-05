@@ -98,7 +98,7 @@ export function removeCartItem (payload) {
     try {
       dispatch({ type: cartConstants.REMOVE_CART_ITEM_REQUEST })
       const res = await axios.post('/user/cart/remove', { payload })
-      console.log({ res })
+   
       if (res.status === 200) {
         dispatch({ type: cartConstants.REMOVE_CART_ITEM_SUCCESS })
         dispatch(getCartItems())

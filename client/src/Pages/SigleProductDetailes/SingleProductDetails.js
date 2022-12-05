@@ -47,6 +47,7 @@ function SingleProductDetails () {
 
   return (
     <div className='product-details-container'>
+      
       <div className='product-image-container'>
         {<img src={productDetails.productPictures[0].images} alt='' />}
         <div className='other-images-container'>

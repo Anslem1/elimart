@@ -24,10 +24,6 @@ axioInstance.interceptors.response.use(
     return res
   },
   error => {
-    console.log(error)
-
-  
-
     switch (error.response.data.message || error.response.data.error.message) {
       case 'Wrong username or password':
         store.dispatch({
@@ -47,7 +43,16 @@ axioInstance.interceptors.response.use(
         })
         alert('Category already exists')
         break
-      case 'jwt expired':
+      case "Couldn't find user":
+        store.dispatch({
+          type: authConstants.LOGIN_FAILURE,
+          payload: {
+            error: error.response.data.message
+          }
+        })
+        alert("Couldn't find user")
+        break
+      case '':
         store.dispatch({ type: authConstants.LOGOUT_SUCCESS })
         alert('Session expired, please login again to renew session')
         localStorage.clear()

@@ -8,6 +8,7 @@ export function SigninUser (user) {
       ...user
     })
 
+
     if (res.status === 200) {
       const { token, user } = res.data
       localStorage.setItem('token', token)

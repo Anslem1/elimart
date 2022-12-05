@@ -58,6 +58,9 @@ function Category () {
 
   function closeModalWithoutSubmit () {
     setModalIsOpen(false)
+    setParentCategoryId('')
+    // setcategoryName('')
+    setcategoryImage('')
   }
 
   function afterOpenUpdateModal () {
@@ -84,24 +87,19 @@ function Category () {
     form.append('categoryImage', categoryImage)
     // form.append('type', pageType)
 
-    if (
-      categoryName ||
-      parentCategoryId ||
-      categoryImage
-      // || pageType
-    ) {
+    if (categoryName) {
       dispatch(addCategory(form))
       setModalIsOpen(false)
 
       setParentCategoryId('')
       setcategoryName('')
       setcategoryImage('')
-      // setPageType('')
     } else {
+      alert('Specify what you want to add')
       setParentCategoryId('')
       setcategoryName('')
       setcategoryImage('')
-      alert('Specify what you want to add')
+
       return
     }
   }
@@ -281,8 +279,6 @@ function Category () {
               handleCategoryImage={handleCategoryImage}
               categoryOptions={categoryOptions(categories.categories)}
               submitCategory={submitCategory}
-              // pageType={pageType}
-              // setPageType={setPageType}
               setcategoryName={setcategoryName}
             />
 

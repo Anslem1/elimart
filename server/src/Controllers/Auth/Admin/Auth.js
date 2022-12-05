@@ -34,7 +34,7 @@ exports.signUp = async (req, res) => {
               { _id: user._id, role: user.role },
               process.env.JWT_SECRET,
               {
-                expiresIn: '1h'
+                expiresIn: '30d'
               }
             )
             const { password, ...userCreds } = user._doc
@@ -62,10 +62,10 @@ exports.signIn = async (req, res) => {
           { _id: user._id, role: user.role },
           process.env.JWT_SECRET,
           {
-            expiresIn: '1h'
+            expiresIn: '30d'
           }
         )
-        res.cookie('token', token, { expiresIn: '1h' })
+        res.cookie('token', token, { expiresIn: '30d' })
         const { password, ...userCreds } = user._doc
         res.status(200).json({ token, user: userCreds })
       } else
@@ -82,11 +82,3 @@ exports.signOut = async (req, res) => {
     message: 'You have signed out successfully'
   })
 }
-
-// exports.requireSignin = (req, res, next) => {
-//   const token = req.headers.authorization.split(' ')[1]
-//   const user = jwt.verify(token, process.env.JWT_SECRET)
-//   // console.log(token)
-//   req.user = user
-//   next()
-// }

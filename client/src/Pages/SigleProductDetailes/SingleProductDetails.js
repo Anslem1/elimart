@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom'
 import { numberWithCommas } from '../../Midlleware'
 import { addToCart, getProductDetailsById } from '../../Redux/actions'
 
-
 import './SingleProductDetails.css'
 
 function SingleProductDetails () {
@@ -14,11 +13,10 @@ function SingleProductDetails () {
   const products = useSelector(state => state.products)
   const { productDetails } = products
   const cart = useSelector(state => state.cart)
+  const auth = useSelector(state => state.auth)
   // const cartItems =
   const [cartItems, setCartItems] = useState(cart.cartItems)
   const [qunatity, setQuantity] = useState('')
-
-  console.log(cartItems)
 
   const { _id, quantity } = productDetails
 
@@ -39,38 +37,24 @@ function SingleProductDetails () {
     return null
   }
 
-  // console.log(productDetails)
-
   function addSingleItemToCart () {
     const { _id, name, price } = productDetails
-    console.log({
-      _id,
-      name,
-      price
-    })
 
     const cartImage = productDetails.productPictures[0].images
-    console.log(cartImage)
+
     dispatch(addToCart({ _id, name, price, cartImage }))
   }
 
   return (
     <div className='product-details-container'>
       <div className='product-image-container'>
-          {
-            <img
-              src={(productDetails.productPictures[0].images)}
-              alt=''
-            />
-          }
+        {<img src={productDetails.productPictures[0].images} alt='' />}
         <div className='other-images-container'>
           {productDetails.productPictures.map(images => {
             return (
-              <img
-                src={(images.images)}
-                alt=''
-                className='other-images'
-              />
+              <a href={images.images} className='link'>
+                <img src={images.images} alt='' className='other-images' />
+              </a>
             )
           })}
         </div>

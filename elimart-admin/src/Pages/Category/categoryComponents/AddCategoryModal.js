@@ -54,16 +54,6 @@ function AddCategoryModal (props) {
             })}
           </select>
         </div>
-        {/* <div className='category-name-container'>
-          <label>type</label>
-
-          <select value={pageType} onChange={e => setPageType(e.target.value)}>
-            <option>--Select type --</option>
-            <option>Page</option>
-            <option>Store</option>
-            <option>Product</option>
-          </select>
-        </div> */}
         <input
           type='file'
           multiple = 'multiple'

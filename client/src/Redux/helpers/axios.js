@@ -2,6 +2,7 @@ import axios from 'axios'
 import { API } from './urlConfig'
 import store from '../store'
 import { authConstants } from '../actions/constants/constants'
+import { signOutUser } from '../actions';
 
 const token = localStorage.getItem('token')
 const axioInstance = axios.create({
@@ -22,10 +23,28 @@ axioInstance.interceptors.response.use(
   },
   error => {
     console.log(error)
-    const { status } = error.response
-    if (status === 500 || status === 400) {
-      // localStorage.clear()
-      // store.dispatch({ type: authConstants.LOGOUT_SUCCESS })
+    switch (error.response.data.message || error.response.data.error.message) {
+      case 'Wrong username or password':
+        store.dispatch({
+          type: authConstants.LOGIN_FAILURE,
+          payload: {
+            error: error.response.data.message
+          }
+        })
+        alert('Wrong username or password')
+        break
+      case 'jwt expired':
+        store.dispatch(signOutUser())
+        window.location.reload()
+        alert('Session expired, please login again to renew session')
+        return
+        break
+      default:
+        // window.location.reload()
+        
+        alert('Something went wrong try again')
+
+        break
     }
     return Promise.reject(error)
   }

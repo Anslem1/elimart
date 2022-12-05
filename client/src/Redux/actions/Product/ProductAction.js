@@ -7,7 +7,7 @@ export function getProductBySlug (slug) {
     const res = await axios.get(`/products/${slug}`)
 
     if (res.status === 200) {
-      console.log(res)
+
       dispatch({
         type: productConstants.GET_PRODUCTS_BY_SLUG_SUCCESS,
         payload: res.data
@@ -17,7 +17,6 @@ export function getProductBySlug (slug) {
         type: productConstants.GET_PRODUCTS_BY_SLUG_FAILURE
       })
     }
-    // console.log(res)
   }
 }
 
@@ -27,19 +26,18 @@ export function getProductPageType (payload) {
       const { cid, pagetype } = payload.params
       dispatch({ type: productConstants.GET_PRODUCT_PAGE_TYPE_REQUEST })
       const res = await axios.get(`/pagetype/${cid}/${pagetype}`)
-      console.log(res)
+    
       if (res.status === 200) {
         dispatch({
           type: productConstants.GET_PRODUCT_PAGE_TYPE_SUCCESS,
           payload: res.data
-        })
+        });
       } else {
         dispatch({
           type: productConstants.GET_PRODUCT_PAGE_TYPE_FAILURE,
           error: res.data.error
-        })
+        });
       }
-      // console.log(res)
     }
   } catch (error) {
     console.log({ error })

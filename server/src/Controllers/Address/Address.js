@@ -3,7 +3,7 @@ const UserAddress = require('../../Models/Address')
 exports.addAddress = (req, res) => {
   const { payload } = req.body
 
-  console.log(payload)
+ 
 
   if (payload.address) {
     if (payload.address._id) {
@@ -16,7 +16,6 @@ exports.addAddress = (req, res) => {
         }
       ).exec((error, address) => {
         if (error) res.status(400).json({ error })
-
         if (address) {
           res.status(200).json({ address })
         }

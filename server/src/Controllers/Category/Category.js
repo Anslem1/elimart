@@ -15,6 +15,7 @@ function addCategories (categories, parentId = null) {
       _id: cate._id,
       name: cate.name,
       slug: cate.slug,
+      categoryImage: cate.categoryImage,
       parentId: cate.parentId,
       pagetype: cate.pagetype,
       children: addCategories(categories, cate._id)
@@ -23,7 +24,7 @@ function addCategories (categories, parentId = null) {
   return categoryList
 }
 
-exports.createCategories = (req, res) => {
+exports.createCategories = async (req, res) => {
   const categoryObject = {
     name: req.body.name,
     slug: slugify(req.body.name),
@@ -32,7 +33,7 @@ exports.createCategories = (req, res) => {
 
   let categoryImageUrl
   if (req.file) {
-    categoryImageUrl = process.env.API + '/public/' + req.file.filename
+    categoryImageUrl = req.file.path
     categoryObject.categoryImage = categoryImageUrl
   }
 
@@ -41,9 +42,18 @@ exports.createCategories = (req, res) => {
   }
   const cate = new Category(categoryObject)
 
-  cate.save((error, category) => {
-    if (error) res.status(400).json({ error })
-    if (category) res.status(200).json({ category })
+  Category.findOne({
+    slug: categoryObject.name
+  }).exec((error, slug) => {
+    error && res.status(400).json({ error })
+    if (slug) {
+      res.status(400).json({ message: 'Category already exists' })
+    } else {
+      cate.save((error, category) => {
+        if (error) res.status(400).json({ error })
+        if (category) res.status(200).json({ category })
+      })
+    }
   })
 }
 

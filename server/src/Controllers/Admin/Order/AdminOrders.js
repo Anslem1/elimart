@@ -24,7 +24,7 @@ exports.getCustomersOrders = async (req, res) => {
       .populate('items.productId', 'name')
       .exec()
     res.status(200).json({ orders })
-    console.log({ orders })
+
   } catch (error) {
     res.status(500).json({ error })
   }

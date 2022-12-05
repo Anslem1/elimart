@@ -75,14 +75,24 @@ function Navbar () {
       allCategories.push(
         <li key={category.name}>
           {category.parentId ? (
-            <Link
+            <a
               href={`/${category.slug}?cid=${category._id}&pagetype=${category.pagetype}`}
               onClick={() => setShowCategory(false)}
             >
               {category.name}
-            </Link>
+            </a>
           ) : (
-            <span>{category.name}</span>
+            <span>
+              {' '}
+              <a
+                href={`/${category.slug}?cid=${category._id}&pagetype=${category.pagetype}`}
+                  onClick={() => setShowCategory(false)}
+                  className='link'
+              >
+                {' '}
+                {category.name}
+              </a>
+            </span>
           )}
           {category.children.length > 0 && (
             <ul>{renderCategories(category.children)}</ul>

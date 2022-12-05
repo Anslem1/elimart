@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { numberWithCommas } from '../../../Midlleware'
-import { removeCartItem } from '../../../Redux/actions'
 
 import '../Cart.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { authConstants } from '../../../Redux/actions/constants/constants'
 
 function CartPage (props) {
   const { cartImage, name, price, key, _id } = props.cartItems
   const [quantity, setQuantity] = useState(props.cartItems.quantity)
   const dispatch = useDispatch()
+
+  const auth = useSelector(state => state.auth)
 
   function incrementQuantity () {
     setQuantity(quantity + 1)
@@ -18,6 +20,12 @@ function CartPage (props) {
     if (quantity <= 1) return
     setQuantity(quantity - 1)
     props.decrementQuantity(_id, quantity - 1)
+  }
+
+  function removeCareItem () {
+    if (auth.authenticated) {
+      props.onRemoveCartItem(_id)
+    } 
   }
 
   return (

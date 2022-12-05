@@ -1,7 +1,10 @@
 import axios from 'axios'
 import { API } from './urlConfig'
 import store from '../store'
-import { authConstants } from '../actions/constants/constants'
+import {
+  authConstants,
+  getCategoryConstants
+} from '../actions/constants/constants'
 
 const token = localStorage.getItem('token')
 const axioInstance = axios.create({
@@ -22,11 +25,35 @@ axioInstance.interceptors.response.use(
   },
   error => {
     console.log(error)
-    const { status } = error.response
-    if (status === 500 || status === 400) {
-      localStorage.clear()
-      store.dispatch({ type: authConstants.LOGOUT_SUCCESS })
+
+  
+
+    switch (error.response.data.message || error.response.data.error.message) {
+      case 'Wrong username or password':
+        store.dispatch({
+          type: authConstants.LOGIN_FAILURE,
+          payload: {
+            error: error.response.data.message
+          }
+        })
+        alert('Wrong username or password')
+        break
+      case 'Category already exists':
+        store.dispatch({
+          type: getCategoryConstants.ADD_CATEGORY_FAILURE,
+          payload: {
+            error: error.response.data.message
+          }
+        })
+        alert('Category already exists')
+        break
+      case 'jwt expired':
+        store.dispatch({ type: authConstants.LOGOUT_SUCCESS })
+        alert('Session expired, please login again to renew session')
+        localStorage.clear()
+        break
     }
+
     return Promise.reject(error)
   }
 )

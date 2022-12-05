@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 function Profile () {
   const auth = useSelector(state => state.auth)
 
-  console.log(auth)
+
 
   return (
     <div className='profile-container'>

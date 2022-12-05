@@ -30,12 +30,12 @@ function CheckoutAdress ({ previousButton, nextButton }) {
     )
 
     setAddress(updatedAddress)
-    console.log(updatedAddress)
+   
   }
 
   function confirmDeliveryAddress (adr) {
     setSelectedConfirmAddress(adr)
-    console.log(adr)
+
     localStorage.setItem('confirmAddress', JSON.stringify(adr))
     setConfirmAddress(true)
   }
@@ -47,7 +47,6 @@ function CheckoutAdress ({ previousButton, nextButton }) {
         : { ...addr, edit: false }
     )
 
-    console.log(updatedAddress)
     setAddress(updatedAddress)
     setEdit(true)
   }

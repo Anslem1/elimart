@@ -1,11 +1,50 @@
-.home-contaeiner {
+.home-container {
      position: absolute;
-     top: 60px;
-
+     top: 70px;
 }
 
+.home-category-image {
+     width: 100px;
+     height: 100px;
+     object-fit: contain;
+}
+
+.hone-content {
+     margin: 20px;
+     display: grid;
+     gap: 20px;
+}
+
+.hone-content > div {
+     /* width: 95%; */
+     overflow-x: auto;
+     overflow-y: hidden;
+}
+.hone-content > a {
+     width: 100px;
+     /* border:1px solid; */
+     padding: 10px;
+     border-radius: 20px;
+     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+          rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+          background: rgb(247, 247, 247);
+     }
+     
+.children {
+     background: rgb(239, 239, 239);
+     display: flex;
+     gap: 10px;
+     padding: 10px;
+     align-items: center;
+
+     top: 0px;
+}
 @media screen and (max-width: 765px) {
-     .home-contaeiner {
+     .home-container {
           top: 90px;
+     }
+     .hone-content > div {
+          width: 350px;
      }
 }

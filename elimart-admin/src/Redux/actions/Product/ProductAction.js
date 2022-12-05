@@ -6,7 +6,7 @@ export function getProducts () {
     try {
       dispatch({ type: productConstants.GET_ALL_PRODUCTS_REQUEST })
       const res = await axios.post(`/product/get`)
-      console.log(res)
+  
 
       if (res.status === 200) {
         const { products } = res.data
@@ -33,7 +33,7 @@ export function addProduct (form) {
   return async dispatch => {
     dispatch({ type: productConstants.ADD_PRODUCT_REQUEST })
     const res = await axios.post('/product/create', form)
-    console.log({ res })
+
       if (res.status === 200) {
         dispatch({
           type: productConstants.ADD_PRODUCT_SUCCESS,
@@ -51,7 +51,7 @@ export const deleteProductById = payload => {
       const res = await axios.delete('/product/delete', {
         data: { payload }
       })
-      console.log(res)
+ 
       dispatch({ type: productConstants.DELETE_PRODUCT_BY_ID_REQUEST })
       if (res.status === 200) {
         dispatch({ type: productConstants.DELETE_PRODUCT_BY_ID_SUCCESS })

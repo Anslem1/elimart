@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import {
   getAddress,
+  getAllCategory,
   getCartItems,
   // getOrder,
   getOrders,
@@ -34,14 +35,18 @@ function App () {
 
   useEffect(() => {
     if (auth.authenticated) {
-      dispatch(getOrders())
-      dispatch(updateCart())
-      dispatch(getCartItems())
-      dispatch(getAddress())
+  token && dispatch(getOrders())
+  token && dispatch(updateCart())
+  token && dispatch(getCartItems())
+  token && dispatch(getAddress())
     } else {
       dispatch(isUserSignedin())
     }
   }, [auth.authenticated])
+
+  useEffect(() => {
+    dispatch(getAllCategory())
+  }, [])
 
   return (
     <div className='App'>

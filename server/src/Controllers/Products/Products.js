@@ -9,8 +9,7 @@ exports.createProduct = (req, res) => {
 
   if (req.files.length > 0) {
     productPictures = req.files.map(file => {
-      //   console.log(file.filename)
-      console.log(file)
+   
       return { images: file.path }
     })
   }

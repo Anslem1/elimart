@@ -17,7 +17,7 @@ function ProductPage () {
   useEffect(() => {
     const params = getParams(location.search)
 
-    console.log(params)
+
 
     const payload = {
       params

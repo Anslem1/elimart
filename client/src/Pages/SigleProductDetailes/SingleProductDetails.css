@@ -133,6 +133,8 @@
      }
      .product-image-container {
       
+          display: flex;
+          justify-content: center;
      }
      .product-image-container img {
           height: 150px;

@@ -11,7 +11,7 @@ export function getInitialData () {
 
     if (res.status === 200) {
       const { categories, products, orders } = res.data
-      console.log({res})
+   
 
       dispatch({
         type: getCategoryConstants.GET_CATEGORIES_SUCCESS,

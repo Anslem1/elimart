@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllCategory } from '../../Redux/actions/Category/CategoryAction'
 import { Link } from 'react-router-dom'
 import SignInModal from '../AuthModals/SigninModal/SignInModal'
 import SignUpModalComponent from '../AuthModals/SignUpModal/SignUpModal'
 import { signOutUser } from '../../Redux/actions'
+import MobileSideBar from './MobileSideBar'
 
 const customStyles = {
   content: {
@@ -78,47 +78,6 @@ function MobileNav () {
     setSignUpModal(false)
   }
 
-  useEffect(() => {
-    dispatch(getAllCategory())
-  }, [])
-
-  function renderCategories (categories) {
-    let allCategories = []
-    for (let category of categories) {
-      allCategories.push(
-        <li key={category.name}>
-          {category.parentId ? (
-            <Link
-              to={`/${category.slug}?cid=${category._id}&pagetype=${category.pagetype}`}
-              onClick={() => setShowCategory(show => !show)}
-            >
-              {category.name}
-            </Link>
-          ) : (
-            <span>{category.name}</span>
-          )}
-          {/* {category.name} */}
-          {category.children.length > 0 && (
-            <ul>{renderCategories(category.children)}</ul>
-          )}
-        </li>
-      )
-    }
-    return allCategories
-  }
-
-  function categoryHeader () {
-    return (
-      showCategory && (
-        <ul>
-          {category.categories.length > 0
-            ? renderCategories(category.categories)
-            : null}
-        </ul>
-      )
-    )
-  }
-
   function loginModal () {
     return (
       <SignInModal
@@ -152,54 +111,50 @@ function MobileNav () {
   return (
     <>
       <nav className='mobile-navbar-container'>
-        <div className='mobile-header'>
-          <Link to='/' className='link'>
-            <h3>
-              <i className='fa-solid fa-cart-plus'></i>
-              Elimart
-            </h3>
-          </Link>
-          <div className='mobile-category-header'>
-            <p onClick={() => setShowCategory(show => !show)}>
-              Categories
-              {showCategory ? (
-                <i className='fa-solid fa-angle-up'></i>
-              ) : (
-                <i className='fa-solid fa-angle-down'></i>
-              )}
-            </p>
-            {categoryHeader()}
+        <div className='mobile-header '>
+          <div className='mobile-nav-item-container'>
+            <MobileSideBar />
+
+            <Link to='/' className='link'>
+              <h3>
+                <i className='fa-solid fa-cart-plus'></i>
+                Elimart
+              </h3>
+            </Link>
           </div>
-          <Link to='/cart' className='link'>
-            <p className='cart-count'>
-              <i className='fa-solid fa-cart-arrow-down'></i>
-              {
-                <>
-                  {Object.keys(cart.cartItems).length > 0 && (
-                    <span>{Object.keys(cart.cartItems).length}</span>
-                  )}
-                </>
-              }
-            </p>
-          </Link>
-          {auth.token && (
-            <Link to={'/profile'} className='link'>
-              <p>
-                <i className='fa-solid fa-user'></i>
+
+          <div className='mobile-nav-item-container'>
+            <Link to='/cart' className='link'>
+              <p className='cart-count'>
+                <i className='fa-solid fa-cart-arrow-down'></i>
+                {
+                  <>
+                    {Object.keys(cart.cartItems).length > 0 && (
+                      <span>{Object.keys(cart.cartItems).length}</span>
+                    )}
+                  </>
+                }
               </p>
             </Link>
-          )}
-          {auth.token ? (
-            <p onClick={signOut}>
-              Signout
-              <i className='fa-solid fa-arrow-right-to-bracket'></i>
-            </p>
-          ) : (
-            <p onClick={openSignInModal}>
-              Login
-              <i className='fa-solid fa-arrow-right-to-bracket'></i>
-            </p>
-          )}
+            {auth.token && (
+              <Link to={'/profile'} className='link'>
+                <p>
+                  <i className='fa-solid fa-user'></i>
+                </p>
+              </Link>
+            )}
+            {auth.token ? (
+              <p onClick={signOut}>
+                Logout
+                <i class='fa-solid fa-right-from-bracket'></i>
+              </p>
+            ) : (
+              <p onClick={openSignInModal}>
+                Login
+                <i className='fa-solid fa-right-to-bracket'></i>
+              </p>
+            )}
+          </div>
         </div>
         <div className='mobile-input-container'>
           <input type='text' name='' id='' placeholder='Search' />

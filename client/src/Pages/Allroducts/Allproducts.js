@@ -6,7 +6,6 @@ import { getProductBySlug } from '../../Redux/actions'
 import getParams from '../../Utility/getParams'
 import './Allproducts.css'
 import NonPageProducts from './NonPageProducts/NonPageProducts'
-import Product from './Product/Product'
 import ProductPage from './ProductPage/ProductPage'
 import ProductStore from './ProductStore/ProductStore'
 
@@ -32,10 +31,6 @@ function Allproducts () {
       case 'Page':
         content = <ProductPage />
         break
-      case 'Product':
-        content = <Product />
-        break
-
       default:
         content = (
           <div className='nonpage-container'>

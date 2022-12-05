@@ -73,9 +73,9 @@ function Product () {
     } else setIsOpen(false)
   }
 
-  console.log({ productPicture })
 
-  console.log({ productPicture })
+
+
   function handleProductPicture (e) {
     setProductPicture([...e.target.files])
   }

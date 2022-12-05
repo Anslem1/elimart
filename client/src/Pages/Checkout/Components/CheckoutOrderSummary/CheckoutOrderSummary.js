@@ -8,25 +8,29 @@ function CheckoutOrderSummary ({ previousButton, nextButton }) {
   const cart = useSelector(state => state.cart)
   const auth = useSelector(state => state.auth)
   const [cartItems, setCartItems] = useState(cart.cartItems)
-  const [orderCofirmation,setOrderConfirmation] = useState(false)
+  const [orderCofirmation, setOrderConfirmation] = useState(false)
 
   const dispatch = useDispatch()
 
   function incrementQuantity (_id, quantity) {
-    const { name, price, cartImage } = cartItems[_id]
-    dispatch(addToCart({ _id, name, price, cartImage }, +1))
+    if (auth.authenticated) {
+      const { name, price, cartImage } = cartItems[_id]
+      dispatch(addToCart({ _id, name, price, cartImage }, +1))
+    }
   }
 
   function decrementQuantity (_id, quantity) {
-    const { name, price, cartImage } = cartItems[_id]
-    dispatch(addToCart({ _id, name, price, cartImage }, -1))
+    if (auth.authenticated) {
+      const { name, price, cartImage } = cartItems[_id]
+      dispatch(addToCart({ _id, name, price, cartImage }, -1))
+    }
   }
 
   useEffect(() => {
     setCartItems(cart.cartItems)
   }, [cart.cartItems])
 
-  function userOrderConfirmation() {
+  function userOrderConfirmation () {
     nextButton()
   }
 
@@ -53,7 +57,7 @@ function CheckoutOrderSummary ({ previousButton, nextButton }) {
             onClick={userOrderConfirmation}
             className='edit-delivary-btn  order-summary-btn'
           >
-       Continue
+            Continue
           </button>
         </div>
 

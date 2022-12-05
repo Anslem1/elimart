@@ -12,7 +12,7 @@ import Orders from './Pages/Orders/Orders'
 import Products from './Pages/Products/Product'
 import Category from './Pages/Category/Category'
 import PageType from './Pages/Pagetype/PageType'
-// import { getInitialData } from './Redux/actions/initialdata/initialdataAction'
+
 
 export function numberWithCommas (x) {
   return x && `₦${' '}${x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`

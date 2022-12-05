@@ -9,9 +9,9 @@ export function UserSignUpUser (user) {
       ...user
     })
 
-    console.log(res)
+
     if (res.status === 200) {
-      console.log(res)
+ 
       const { message } = res.data
       dispatch({
         type: userSignUpConstants.USER_SIGNUP_SUCCESS,

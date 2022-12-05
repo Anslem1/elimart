@@ -38,7 +38,7 @@ function Checkoutlogin ({ index, previousButton, nextButton }) {
 
   }
 
-  console.log(auth.token)
+
   return (
     <div className='login-checkout'>
       <div className='signUp-btn-container signup-checkout'>

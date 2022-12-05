@@ -12,7 +12,7 @@ export function SignUpUser (user) {
       ...user
     })
     if (res.status === 200) {
-      console.log(res)
+  
       const { token, user, message } = res.data
       localStorage.setItem('token', token)
       localStorage.setItem('user', JSON.stringify(user))
@@ -42,14 +42,13 @@ export function SignUpUser (user) {
 }
 
 export function SigninUser (user) {
-  console.log(user)
+
   return async dispatch => {
     dispatch({ type: authConstants.LOGIN_REQUEST })
     const res = await axios.post('/auth/signin', {
       ...user
     })
     if (res.status === 200) {
-      console.log(res)
       const { token, user } = res.data
       localStorage.setItem('token', token)
       localStorage.setItem('user', JSON.stringify(user))
@@ -60,7 +59,7 @@ export function SigninUser (user) {
           user
         }
       })
-    } else if (res.status === 400 || 500) {
+    } else {
       dispatch({
         type: authConstants.LOGIN_FAILURE,
         payload: { error: res.data.error }
@@ -80,11 +79,6 @@ export function isUserSignedin () {
           token,
           user
         }
-      })
-    } else {
-      dispatch({
-        type: authConstants.LOGIN_FAILURE,
-        payload: { error: 'Failed to login' }
       })
     }
   }

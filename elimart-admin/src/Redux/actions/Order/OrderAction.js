@@ -7,7 +7,7 @@ export function getCustomerOrders () {
     try {
       const res = await axios.get('/admin/orders/getcustomerorders')
       if (res.status === 200) {
-        console.log(res)
+
         const { orders } = res.data
 
         dispatch({
@@ -33,7 +33,7 @@ export function updateOrder (payload) {
     try {
       const res = await axios.post('/admin/orders/update', payload)
       if (res.status === 200) {
-        console.log(res)
+  
         dispatch({
           type: orderConstant.UPDATE_CUSTOMER_ORDER_SUCCESS
         })

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { numberWithCommas } from '../../Midlleware'
 import { Link } from 'react-router-dom'
-import { getAddress, getOrder } from '../../Redux/actions'
 
 import './Order.css'
 
@@ -14,7 +13,6 @@ function Order () {
     <>
       <div className='order-container'>
         {user.orders.map(order => {
-          console.log({ order })
           return order.items.map((item, index) => {
             // console.log({item})
             return (
@@ -32,7 +30,7 @@ function Order () {
                   </div>
 
                   <div className='payment-status-price'>
-                    <p>{order.paymentStatus}</p>
+                    <p>Payment confirmed</p>
                     <p>{numberWithCommas(item.payablePrice)}</p>
                   </div>
                 </div>

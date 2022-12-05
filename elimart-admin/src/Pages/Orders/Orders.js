@@ -101,9 +101,9 @@ function Orders () {
                   <select name='' id='' onChange={e => setType(e.target.value)}>
                     <option>Order status</option>
 
-                    {console.log({ order: orderItem.orderStatus })}
+                   
                     {orderItem.orderStatus.map(status => {
-                      console.log(status.type)
+                    
                       return (
                         <>
                           {!status.isCompleted && (

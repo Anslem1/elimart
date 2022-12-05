@@ -107,10 +107,10 @@ function Producttable () {
         <table className='table'>
           <thead>
             <tr>
-              <th>#</th>
+              <th>No.</th>
               <th>Name</th>
               <th>Price</th>
-              {/* <th>Description</th> */}
+
               <th>Quantity</th>
               <th>Category</th>
               <th>Info</th>

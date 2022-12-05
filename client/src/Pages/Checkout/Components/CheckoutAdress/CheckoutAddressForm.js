@@ -66,12 +66,8 @@ function CheckoutAddressForm ({
     setSubmitFlag(true)
   }
 
-  console.log(id)
-
   useEffect(() => {
-    console.log('addressCount', user.address)
     if (submitFlag) {
-      console.log('where are we', user)
       let _address = {}
       if (id) {
         _address = {
@@ -90,7 +86,7 @@ function CheckoutAddressForm ({
       }
 
       confirmDeliveryAddress(_address)
-      console.log({ _address })
+
     }
   }, [user.address])
 
@@ -101,7 +97,7 @@ function CheckoutAddressForm ({
         : { ...addr, edit: false }
     )
 
-    console.log(updatedAddress)
+
     setAddressState(updatedAddress)
     setEdit(false)
   }

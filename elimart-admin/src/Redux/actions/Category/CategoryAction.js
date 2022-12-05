@@ -47,7 +47,7 @@ export function updateCategories (form) {
     dispatch({ type: getCategoryConstants.UPDATE_CATEGORY_REQUEST })
 
     const res = await axios.post('/categories/update', form)
-    console.log({ res })
+ 
 
     if (res.status === 200) {
       dispatch({ type: getCategoryConstants.UPDATE_CATEGORY_SUCCESS })

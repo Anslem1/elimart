@@ -35,7 +35,7 @@ exports.signUp = async (req, res) => {
                 { _id: user._id, role: user.role },
                 process.env.JWT_SECRET,
                 {
-                  expiresIn: '1h'
+                  expiresIn: '30d'
                 }
               )
               const { password, ...userCreds } = user._doc
@@ -66,10 +66,10 @@ exports.signIn = async (req, res) => {
           { _id: user._id, role: user.role },
           process.env.JWT_SECRET,
           {
-            expiresIn: '1h'
+            expiresIn: '30d'
           }
         )
-        res.cookie('token', token, { expiresIn: '1h' })
+        res.cookie('token', token, { expiresIn: '30d' })
         const { password, ...userCreds } = user._doc
         res.status(200).json({ token, user: userCreds })
       } else

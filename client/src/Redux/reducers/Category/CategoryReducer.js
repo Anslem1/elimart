@@ -68,8 +68,6 @@ export default function (state = initialState, action) {
       break
     case getCategoryConstants.ADD_CATEGORIES_SUCCESS:
       const category = action.payload.category
-      console.log(category)
-
       const updatedCategories = pushCategoryToList(
         category.parentId,
         state.categories,

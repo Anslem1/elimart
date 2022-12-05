@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import PriceDetails from '../../Components/PriceDetails/PriceDetails'
 import { numberWithCommas } from '../../Midlleware'
 import { addToCart, getCartItems, removeCartItem } from '../../Redux/actions'
+import { generatePublicURL } from '../../Redux/helpers/urlConfig'
 
 import CartPage from './CartPage/CartPage'
 

@@ -10,11 +10,8 @@ function CheckoutPayment ({ previousButton }) {
   const cart = useSelector(state => state.cart)
   const orders = useSelector(state => state.user)
   const selectedAddress = JSON.parse(localStorage.getItem('confirmAddress'))
-
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  console.log(orders.fetchedOrders)
 
   function onConfirmOrder () {
     if (confirmOrder) {

@@ -9,12 +9,8 @@ const {
   adminMiddleware,
   upload
 } = require('../../Middlewares/middleware')
-const shortid = require('shortid')
-const path = require('path')
-const multer = require('multer')
 
 const router = require('express').Router()
-
 
 router
   .post(
@@ -28,15 +24,10 @@ router
     '/update',
     requireSignin,
     adminMiddleware,
-    upload.array('categoryImage'),
+    upload.single('categoryImage'),
     updateCategories
   )
-  .post(
-    '/delete',
-    requireSignin,
-    adminMiddleware,
-    deleteCategories
-  )
+  .post('/delete', requireSignin, adminMiddleware, deleteCategories)
   .get('/get', getAllCategories)
 
 module.exports = router

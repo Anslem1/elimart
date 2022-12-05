@@ -10,7 +10,6 @@ function OrderDetails () {
   const params = useParams()
   const orderDetails = useSelector(state => state.user.orderDetails)
 
-  console.log(params)
 
   useEffect(() => {
     const { orderId } = params
@@ -21,7 +20,7 @@ function OrderDetails () {
     dispatch(getOrder(payload))
   }, [])
 
-  console.log({ orderDetails })
+
 
   const formatDate = date => {
     if (date) {
@@ -85,7 +84,7 @@ function OrderDetails () {
             <>
               <div className='flexRow'>
                 <div className='delItemImgContainer'>
-                  <img src={item.productId.productPictures[0].img} alt='' />
+                  <img src={item.productId.productPictures[0].images} alt='' />
                 </div>
                 <div style={{ width: '250px' }}>
                   <div className='delItemName'>{item.productId.name}</div>

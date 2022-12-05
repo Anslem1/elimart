@@ -80,9 +80,7 @@ exports.getCartItems = (req, res) => {
 }
 
 exports.removeCartItems = (req, res) => {
-  console.log({ body: req.body })
   const { productId } = req.body.payload
-  console.log(productId)
   if (productId) {
     try {
       Cart.updateOne(

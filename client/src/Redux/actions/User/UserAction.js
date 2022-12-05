@@ -1,5 +1,9 @@
 import axios from '../../helpers/axios'
+import { useSelector } from 'react-redux'
+
 import { cartConstants, userConstants } from '../constants/constants'
+
+const token = localStorage.getItem('token')
 
 export function getAddress () {
   return async dispatch => {
@@ -31,15 +35,12 @@ export function addAddress (payload) {
     try {
       const res = await axios.post('/user/address/create', { payload })
       dispatch({ type: userConstants.ADD_USER_ADDRESS_REQUEST })
-      console.log({ payload })
 
-      console.log({ res })
       if (res.status === 200) {
-        console.log({ res })
         const {
           address: { address }
         } = res.data
-        console.log(address)
+
         dispatch({
           type: userConstants.ADD_USER_ADDRESS_SUCCESS,
           payload: { address }
@@ -83,12 +84,13 @@ export function getOrders () {
 
 export function addOrder (payload) {
   return async dispatch => {
+
     try {
       const res = await axios.post('/user/orders/add', payload)
       dispatch({ type: userConstants.ADD_USER_ORDER_REQUEST })
       if (res.status === 200) {
         dispatch({ type: cartConstants.RESET_CART })
-        dispatch(getOrders())
+        token && dispatch(getOrders())
       } else {
         const { error } = res.data
         dispatch({
@@ -105,7 +107,7 @@ export function getOrder (payload) {
   return async dispatch => {
     try {
       const res = await axios.post('/user/orders/getorder', payload)
-      console.log({ res })
+
       dispatch({ type: userConstants.GET_USER_ORDER_DETAILS_REQUEST })
 
       if (res.status === 200) {

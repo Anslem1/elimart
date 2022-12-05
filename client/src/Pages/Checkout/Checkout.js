@@ -2,16 +2,13 @@ import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import PriceDetails from '../../Components/PriceDetails/PriceDetails'
-import { getAddress } from '../../Redux/actions'
 import './Checkout.css'
 import CheckoutProgressBar from './CheckoutProgressBar/CheckoutProgressBar'
 import { CheckoutFormItems } from './Components/CheckoutFormItem'
 
 function Checkout () {
-  const user = useSelector(state => state.user)
+
   const cart = useSelector(state => state.cart)
-  const auth = useSelector(state => state.auth)
-  const dispatch = useDispatch()
   const [index, setIndex] = useState(1)
 
   function previousButton () {
@@ -22,6 +19,8 @@ function Checkout () {
     if (index >= 4) return
     setIndex(nextIndex => nextIndex + 1)
   }
+
+
 
   return (
     <div className='checkout-container'>

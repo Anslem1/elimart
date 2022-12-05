@@ -56,7 +56,6 @@ function ProductStore () {
                         <p>{numberWithCommas(product.price)}</p>
                       </div>
                       <div className='rating'>
-                        <span>4.3</span>
                         <span>({product.quantity})</span>
                       </div>
                     </div>

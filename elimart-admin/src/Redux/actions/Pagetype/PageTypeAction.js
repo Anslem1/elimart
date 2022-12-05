@@ -7,7 +7,7 @@ export function createPage (form) {
     try {
       const res = await axios.post('/pagetype/create', form)
       if (res.status === 200) {
-        console.log(res)
+
         dispatch({
           type: pageTypeConstants.CREATE_PAGE_TYPE_SUCCESS,
           payload: { pagetype: res.data.pagetype }

@@ -21,6 +21,10 @@
      margin-bottom: 10px;
      color: rgb(133, 133, 133);
 }
+
+.table-price{
+     white-space: nowrap;
+}
 .product-content p {
      font-family: Open sans;
      font-size: 12px;

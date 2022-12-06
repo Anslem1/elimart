@@ -1,6 +1,8 @@
 .home-container {
      position: absolute;
      top: 70px;
+     width: 100%;
+
 }
 
 .home-category-image {
@@ -10,13 +12,13 @@
 }
 
 .hone-content {
-     margin: 20px;
      display: grid;
      gap: 20px;
+     margin: 20px;
 }
 
 .hone-content > div {
-     /* width: 95%; */
+     width: 95% !important; 
      overflow-x: auto;
      overflow-y: hidden;
 }

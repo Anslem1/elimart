@@ -10,7 +10,6 @@ function OrderDetails () {
   const params = useParams()
   const orderDetails = useSelector(state => state.user.orderDetails)
 
-
   useEffect(() => {
     const { orderId } = params
 
@@ -19,8 +18,6 @@ function OrderDetails () {
     }
     dispatch(getOrder(payload))
   }, [])
-
-
 
   const formatDate = date => {
     if (date) {
@@ -82,12 +79,22 @@ function OrderDetails () {
 
           {orderDetails.items.map((item, index) => (
             <>
+            
               <div className='flexRow'>
                 <div className='delItemImgContainer'>
                   <img src={item.productId.productPictures[0].images} alt='' />
                 </div>
-                <div style={{ width: '250px' }}>
+                <div style={{ width: '250px', fontFamily: 'Roboto' }}>
                   <div className='delItemName'>{item.productId.name}</div>
+                  <p
+                    style={{
+                      marginTop: '10px',
+                      fontFamily: 'Open sans',
+                      fontSize: '15px'
+                    }}
+                  >
+                    Quanity: {item.purchasedQuantity}
+                  </p>
                   {/* <Price value={item.payablePrice} /> */}
                 </div>
               </div>

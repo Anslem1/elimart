@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { numberWithCommas } from '../../Midlleware'
 import { addToCart, getProductDetailsById } from '../../Redux/actions'
 
@@ -19,6 +19,7 @@ function SingleProductDetails () {
   const [qunatity, setQuantity] = useState('')
 
   const { _id, quantity } = productDetails
+  const navigate = useNavigate()
 
   useEffect(() => {
     const { productId } = params
@@ -44,10 +45,15 @@ function SingleProductDetails () {
 
     dispatch(addToCart({ _id, name, price, cartImage }))
   }
+  function buyNow () {
+    const { _id, name, price } = productDetails
+    const cartImage = productDetails.productPictures[0].images
+    dispatch(addToCart({ _id, name, price, cartImage }))
+    navigate('/checkout')
+  }
 
   return (
     <div className='product-details-container'>
-      
       <div className='product-image-container'>
         {<img src={productDetails.productPictures[0].images} alt='' />}
         <div className='other-images-container'>
@@ -76,7 +82,9 @@ function SingleProductDetails () {
           <button className='add-to-cart' onClick={addSingleItemToCart}>
             Add to cart
           </button>
-          <button className='buy-now'>Buy now</button>
+          <button className='buy-now' onClick={buyNow}>
+            Buy now
+          </button>
         </div>
       </div>
     </div>

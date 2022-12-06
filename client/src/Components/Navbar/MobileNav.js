@@ -146,7 +146,7 @@ function MobileNav () {
             {auth.token ? (
               <p onClick={signOut}>
                 Logout
-                <i class='fa-solid fa-right-from-bracket'></i>
+                <i className='fa-solid fa-right-from-bracket'></i>
               </p>
             ) : (
               <p onClick={openSignInModal}>

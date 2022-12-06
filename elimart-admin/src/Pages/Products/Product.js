@@ -73,9 +73,6 @@ function Product () {
     } else setIsOpen(false)
   }
 
-
-
-
   function handleProductPicture (e) {
     setProductPicture([...e.target.files])
   }

@@ -26,7 +26,6 @@
 .signup,
 .signin {
      border: none;
-
      padding: 10px 25px;
      border-radius: 20px;
      cursor: pointer;
@@ -34,6 +33,7 @@
 
 .signin {
      background-color: rgb(117, 37, 191);
+     color: white;
 }
 
 .signup {
